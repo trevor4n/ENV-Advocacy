@@ -2,36 +2,35 @@
     {
         "name": "Protect Our Winters",
         "abrev": "POW",
-        "logo": "https://protectourwinters.org/wp-content/uploads/pow-main-logo.svg", //TOOD - use multer for hosting images
+        "logo": "https://protectourwinters.org/wp-content/uploads/pow-main-logo.svg",
         "tags": ["winter", "sports", "climate"],
         "url": "https://protectourwinters.org/"
-        //"snippets": [] //STRETCH - currently planning to use relational tags b/n orgs and snippets. in that case this array can be depreciated. that would also enable snippets to be sourced from resources relating to (yet not sourced from) orgs themselves
     },
     {
         "name": "The Intergovernmental Panel on Climate Change",
         "abrev": "ipcc",
-        "logo": "https://www.ipcc.ch/site/assets/uploads/sites/2/2018/08/ipcc-logo.png", //TOOD - use multer for hosting images
+        "logo": "https://www.ipcc.ch/site/assets/uploads/sites/2/2018/08/ipcc-logo.png",
         "tags": ["policy", "scientific", "United Nations", "climate"],
         "url": "https://www.ipcc.ch/"
     },
     {
         "name": "Global Climate Change",
         "abrev": "NASA",
-        "logo": "https://climate.nasa.gov/assets/logo_nasa_trio_black@2x.png", //TOOD - use multer for hosting images
+        "logo": "https://climate.nasa.gov/assets/logo_nasa_trio_black@2x.png",
         "tags": ["scientific", "global", "climate"],
         "url": "https://climate.nasa.gov/"
     },
     {
         "name": "Next 10",
-        "abrev": "", //TODO - handle empty case
-        "logo": "https://www.next10.org/themes/custom/nexttheme/logo.svg", //TOOD - use multer for hosting images
+        "abrev": "",
+        "logo": "https://www.next10.org/themes/custom/nexttheme/logo.svg",
         "tags": ["economy", "energy", "governance", "climate"],
         "url": "https://www.next10.org/"
     },
     {
         "name": "United Nations",
         "abrev": "UN",
-        "logo": "https://unfccc.int/themes/custom/unfccc/images/logo.png", //TOOD - use multer for hosting images
+        "logo": "https://unfccc.int/themes/custom/unfccc/images/logo.png",
         "tags": ["economy", "governance", "United Nations", "climate"],
         "url": "https://unfccc.int/"
     }

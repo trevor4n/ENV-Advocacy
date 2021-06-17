@@ -1,7 +1,7 @@
 const mongoose = require('../db/connections')
 
 const UserSchema = new mongoose.Schema({
-    name: String,
+    name: {type: String, unique: true, required: 'Please enter your {PATH}'},
     tags: [String],
     curator: {type: Boolean, default: false},
     reRolled: [
@@ -10,9 +10,9 @@ const UserSchema = new mongoose.Schema({
             ref: "Snippet"
         }
     ],
-    snipets: [{
+    snippets: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Snipet"
+        ref: "Snippet"
     }],
     orgs: [{
         type: mongoose.Schema.Types.ObjectId,

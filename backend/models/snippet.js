@@ -3,7 +3,7 @@ const mongoose = require('../db/connections')
 const SnippetSchema = new mongoose.Schema({
     data: String,
     tags: [String],
-    src: String,
+    src: {type: String, required: 'Please document your {PATH}'}, //TODO - verify that path prints as src
     ref: {
         type: mongoose.Schema.Types.ObjectId,
         //ref: "Org"

@@ -2,9 +2,8 @@
     {
         "data": "At lower elevations where temperatures are near the freezing point, global warming is causing a significant shift from snowfall events to rainfall events",
         "tags": ["climate", "winter", "global"],
-        "src": "https://protectourwinters.org/wp-content/uploads/2019/12/POW-2018-economic-report.pdf", //STRETCH - this assumes the org hosting scientific advocacy data (with verifiable sources) doesn't change their page AND that ENV-Advocacy users will search through the provided link to find said data. It would be better to provide a detailed and static description of body of work / authors / pub date
-        "ref": {"ref": "Org"} //ENV-Advocacy org relationship
-        //TODO - ^needs to specifically link to the POW org
+        "src": "https://protectourwinters.org/wp-content/uploads/2019/12/POW-2018-economic-report.pdf",
+        "ref": {"ref": "Org"}
     },
     {
         "data": "On land, impacts on biodiversity and ecosystems, including species loss and extinction, are projected to be lower at 1.5°C of global warming compared to 2°C. Limiting global warming to 1.5°C compared to 2°C is projected to lower the impacts on terrestrial, freshwater and coastal ecosystems",
@@ -34,6 +33,5 @@
         "data": "From 2008 to 2017, the fraction of precipitation falling as snow declined at a rate of 3.5 percent per year (Sierra Nevada Mountain Range)",
         "tags": ["climate", "sports"],
         "src": "https://www.climate.gov/news-features/climate-and/climate-skiing"
-        //At least one snippet not indirectly obtainned from a reference org
     }
 ]
