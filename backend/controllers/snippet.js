@@ -54,13 +54,12 @@ router.delete("/:id", (req, res, next) => {
     .catch(next)
 })
 
-//todo - https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half
+// todo - https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half
 
-//STRETCH: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/advanced.md 
+// STRETCH: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/advanced.md 
 // use redirects for post, update, delete routes (Paresh)
-//example
 // app.get("/", (req, res) => {
-//   res.redirect("/api/snippets");
-// });
+//     res.redirect("/snippet")
+// })
 
 module.exports = router

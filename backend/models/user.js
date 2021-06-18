@@ -7,16 +7,16 @@ const UserSchema = new mongoose.Schema({
     reRolled: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Snippet"
+            ref: 'Snippet'
         }
     ],
     snippets: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Snippet"
+        ref: 'Snippet'
     }],
     orgs: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Org"
+        ref: 'Org'
     }]
 })
 

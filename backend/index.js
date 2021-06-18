@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).send(message)
 })
 
-app.set('port', process.env.PORT || 0042)
+app.set('port', process.env.PORT || 4200)
 
 app.listen(app.get('port'), () => {
     console.log(`✅ PORT: ${app.get('port')} 🌟`)

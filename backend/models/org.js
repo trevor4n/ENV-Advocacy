@@ -8,7 +8,7 @@ const OrgSchema = new mongoose.Schema({
     url: String,
     curator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
     } 
 })
 

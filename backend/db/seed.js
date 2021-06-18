@@ -4,21 +4,27 @@ const User = require('../models/user')
 
 const snippetSeeds = require('./snippetSeeds.json')
 const orgSeeds = require('./orgSeeds.json')
-const userSeeds = require('./userSeeds.json')
+// const userSeeds = require('./userSeeds.json')
 
 let seedCurator = null
 
-Snippet.deleteMany({})
-.then(() => {
-    Org.deleteMany({})
-})
-.then(() => {
-    User.deleteMany({})
-})
-.then(() => {
-    seedCurator = User.create({name: 'seed curator', tags: [], curator: true})
-    return seedCurator
-})
+// Start - section to comment out during all subsequent seeds
+seedCurator = User.create({name: 'seedcurator', curator: true})
+// End - section to comment out during all subsequent seeds
+
+// Start - section to comment out during first seed ever
+// Snippet.deleteMany({})
+// .then(() => {
+//     Org.deleteMany({})
+// })
+// .then(() => {
+//     User.deleteMany({})
+// })
+// .then(() => {
+//     seedCurator = User.create({name: 'seed curator', tags: [], curator: true})
+//     return seedCurator
+// })
+// End - section to comment out during first seed ever
 .then((user) => {
     return snippetSeeds.map( (snippet) => {
         return ({...snippet, curator: user._id})

@@ -6,12 +6,12 @@ const SnippetSchema = new mongoose.Schema({
     src: {type: String, required: 'Please document your {PATH}'}, //TODO - verify that path prints as src
     ref: {
         type: mongoose.Schema.Types.ObjectId,
-        //ref: "Org"
-        ref: String
+        ref: 'Org'
+        // ref: String
     },
     curator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
     } 
 })
 
