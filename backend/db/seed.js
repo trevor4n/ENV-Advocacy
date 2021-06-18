@@ -9,7 +9,7 @@ const orgSeeds = require('./orgSeeds.json')
 let seedCurator = null
 
 // Start - section to comment out during all subsequent seeds
-seedCurator = User.create({name: 'seedcurator', curator: true})
+seedCurator = User.create({name: 'Curator', curator: true})
 // End - section to comment out during all subsequent seeds
 
 // Start - section to comment out during first seed ever

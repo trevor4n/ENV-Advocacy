@@ -31,14 +31,14 @@ router.post("/", (req, res, next) => {
 })
 
 //Update - put
-router.put('/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => { // TODO - verify curator first
     const id = req.params.id
     //Snippet.findByIdAndUpdate(
-    Snippet.findOneAndUpdate(
+    Snippet.findOneAndUpdate( // TODO - handle Orgs too (hb User?)
         //{id: req.params.id},
         {_id: id},
         {
-            title: req.body.title,
+            title: req.body.title, // TODO - proper fields for snippet/org/user
             url: req.body.url
         },
         {new: true}
