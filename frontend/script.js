@@ -1,3 +1,8 @@
+const mdc = require('material-components-web')
+import {MDCChipSet} from '@material/chips';
+const chipSetEl = document.querySelector('.mdc-chip-set');
+const chipSet = new MDCChipSet(chipSetEl);
+
 const wrap = document.querySelector('.wrap')
 
 function genFilters(){
@@ -12,3 +17,7 @@ function genFilters(){
 }
 
 //genFilters()
+
+mdc.ripple.MDCRipple.attachTo(document.querySelector('.foo-button'))
+
+// stretch - Using MDC Web with Sass and ES2015 https://material.io/develop/web/getting-started

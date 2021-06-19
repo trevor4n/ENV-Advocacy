@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const ejs = require('ejs')
+//const ejs = require('ejs')
 const app = express()
 
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.

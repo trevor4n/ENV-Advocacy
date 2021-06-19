@@ -15,6 +15,7 @@ router.get('/', (req, res, next) => {
     .then( snippets => {
         let tagSet = new Set()
         snippets.forEach(snippet => { snippet.tags.forEach(tag => tagSet.add(tag))})
+        console.log(snippets)
         return tagSet
     })
     // .then(snippets => res.json(snippets))
