@@ -9,8 +9,6 @@ const User = require('../models/user')
 //Index
 router.get('/', (req, res, next) => {
     Snippet.find({})
-    //ref: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half  
-    //We could use a second API call to get the details for the curator, but Mongoose makes it easy to add virtual data to our response object
     .populate('curator')
     .then( snippets => {
         let tagSet = new Set()
