@@ -12,18 +12,24 @@ router.get('/', (req, res, next) => {
     //ref: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half  
     //We could use a second API call to get the details for the curator, but Mongoose makes it easy to add virtual data to our response object
     .populate('curator')
-    //.then(snippets => res.json(snippets))
-    .then(res.render('index')) // ejs detects dir and extension
-    .catch(next) //STRETCH (reading) - https://expressjs.com/en/guide/routing.html#route-methods
+    .then( snippets => {
+        let tagSet = new Set()
+        snippets.forEach(snippet => { snippet.tags.forEach(tag => tagSet.add(tag))})
+        return tagSet
+    })
+    // .then(snippets => res.json(snippets))
+    .then(tagSet => res.render('index', {tags: tagSet})) // ejs detects dir and extension
+    .catch(next) // stretch - read https://expressjs.com/en/guide/routing.html#route-methods
 })
 
 //Show / Detail
 router.get("/:id", (req, res, next) => {
     Snippet.findById(req.params.id)
     .populate('curator')
-    .then(snippet => res.render('index', {snip: snippet, data: snippet.data}))  
+    .then(snippet => res.render('show', {data: snippet.data}))  
+    // .then(snippet => res.json(snippet))
     .catch(next)
-    })
+})
 
 //Create
 router.post("/", (req, res, next) => {
@@ -33,14 +39,14 @@ router.post("/", (req, res, next) => {
 })
 
 //Update - put
-router.put('/:id', (req, res, next) => { // TODO - verify curator first
+router.put('/:id', (req, res, next) => { // todo - verify curator first
     const id = req.params.id
     //Snippet.findByIdAndUpdate(
-    Snippet.findOneAndUpdate( // TODO - handle Orgs too (hb User?)
+    Snippet.findOneAndUpdate( // todo - handle Orgs too (hb User?)
         //{id: req.params.id},
         {_id: id},
         {
-            title: req.body.title, // TODO - proper fields for snippet/org/user
+            title: req.body.title, // todo - proper fields for snippet/org/user
             url: req.body.url
         },
         {new: true}
@@ -55,13 +61,5 @@ router.delete("/:id", (req, res, next) => {
     .then(snippet => res.json(snippet))
     .catch(next)
 })
-
-// todo - https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half
-
-// STRETCH: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/advanced.md 
-// use redirects for post, update, delete routes (Paresh)
-// app.get("/", (req, res) => {
-//     res.redirect("/snippet")
-// })
 
 module.exports = router

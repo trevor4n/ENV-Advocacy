@@ -21,12 +21,12 @@
     },
         {
         "data": "Some e-waste from industrialized countries is being shipped to the developing world, “where crude and inefficient techniques are often used to extract materials and components”, a trend which is posing challenges to global sustainability governance", 
-        "tags": ["climate", ""],
+        "tags": ["climate", "governance", "global"],
         "src": "https://unfccc.int/news/un-ecological-damage-putting-millions-of-lives-at-risk"
     },
     {   
         "data": "From 2008 to 2017, the fraction of precipitation falling as snow declined at a rate of 3.5 percent per year (Sierra Nevada Mountain Range)",
-        "tags": ["climate", "sports"],
+        "tags": ["climate", "winter", "sports"],
         "src": "https://www.climate.gov/news-features/climate-and/climate-skiing"
     }
 ]

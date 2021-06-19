@@ -26,5 +26,5 @@ app.listen(app.get('port'), () => {
     console.log(`✅ PORT: ${app.get('port')} 🌟`)
 })
 
-//STRETCH - redirect?
-app.get('/', (req, res) => {res.send(`You've reached the ENV-Advocacy index. </br> Navigate to the '/snippet/:id' path for routing`)})
+//app.get('/', (req, res) => {res.send(`You've reached the ENV-Advocacy index. </br> Navigate to the '/snippet/:id' path for routing`)})
+app.get('/', (req, res) => {res.redirect('/snippet')})

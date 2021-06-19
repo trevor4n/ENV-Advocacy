@@ -11,7 +11,10 @@
     <p>Filters:</p>
     <ul class="wrap noselect">
         <!-- filter buttons -->
+        
+        <% tags.forEach(tag => { %>
+            <li> <%= tag %> </li>
+        <% }) %> 
     </ul>
-    <div><%= data %></div>
 </body>
 </html>
