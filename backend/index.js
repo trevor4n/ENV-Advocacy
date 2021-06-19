@@ -1,6 +1,7 @@
 const express = require('express')
-const app = express()
 const cors = require('cors')
+const ejs = require('ejs')
+const app = express()
 
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.
 app.use(express.json())
@@ -18,8 +19,12 @@ app.use((err, req, res, next) => {
     res.status(statusCode).send(message)
 })
 
+app.set('view engine', 'ejs')
 app.set('port', process.env.PORT || 4200)
 
 app.listen(app.get('port'), () => {
     console.log(`✅ PORT: ${app.get('port')} 🌟`)
 })
+
+//STRETCH - redirect?
+app.get('/', (req, res) => {res.send(`You've reached the ENV-Advocacy index. </br> Navigate to the '/snippet/:id' path for routing`)})

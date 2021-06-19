@@ -8,6 +8,7 @@ const orgSeeds = require('./orgSeeds.json')
 
 let seedCurator = null
 
+// Stretch - use conditionals instead of comments lol
 // Start - section to comment out during all subsequent seeds
 seedCurator = User.create({name: 'Curator', curator: true})
 // End - section to comment out during all subsequent seeds

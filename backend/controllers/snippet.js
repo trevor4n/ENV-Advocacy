@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 const Snippet = require('../models/snippet')
-const Org = require('../models/org')
+const Org = require('../models/org') // todo - org should have its own controller
 const User = require('../models/user')
+
 
 //Index
 router.get('/', (req, res, next) => {
@@ -11,7 +12,8 @@ router.get('/', (req, res, next) => {
     //ref: https://git.generalassemb.ly/flex-323/express-apis-json/blob/master/README.md#second-half  
     //We could use a second API call to get the details for the curator, but Mongoose makes it easy to add virtual data to our response object
     .populate('curator')
-    .then(snippets => res.json(snippets))
+    //.then(snippets => res.json(snippets))
+    .then(res.render('index')) // ejs detects dir and extension
     .catch(next) //STRETCH (reading) - https://expressjs.com/en/guide/routing.html#route-methods
 })
 
@@ -19,7 +21,7 @@ router.get('/', (req, res, next) => {
 router.get("/:id", (req, res, next) => {
     Snippet.findById(req.params.id)
     .populate('curator')
-    .then((snippet) => res.json(snippet))  
+    .then(snippet => res.render('index', {snip: snippet, data: snippet.data}))  
     .catch(next)
     })
 
