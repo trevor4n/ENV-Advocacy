@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const Snippet = require('../models/snippet')
-const Org = require('../models/org') // todo - org should have its own controller
-const User = require('../models/user')
-
 
 //Index
 router.get('/', (req, res, next) => {
@@ -13,7 +10,7 @@ router.get('/', (req, res, next) => {
     .then( snippets => {
         let tagSet = new Set()
         snippets.forEach(snippet => { snippet.tags.forEach(tag => tagSet.add(tag))})
-        console.log(snippets)
+        //console.log(snippets)
         return tagSet
     })
     // .then(snippets => res.json(snippets))
@@ -24,8 +21,8 @@ router.get('/', (req, res, next) => {
 //Show / Detail
 router.get("/:id", (req, res, next) => {
     Snippet.findById(req.params.id)
-    .populate('curator')
-    .then(snippet => res.render('show', {data: snippet.data}))  
+    //.populate('curator') //shouldnt be necessary for UI
+    .then(snippet => res.render('show', {data: snippet.data, src: snippet.src, curator: snippet.curator, tags: snippet.tags}))  
     // .then(snippet => res.json(snippet))
     .catch(next)
 })
@@ -34,23 +31,29 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
     Snippet.create(req.body)
     .then(snippet => res.json(snippet))
+    .then(console.log('^ snippet create ^'))
+    .then(res.redirect('index')) // todo - fix path
     .catch(next)
 })
 
 //Update - put
-router.put('/:id', (req, res, next) => { // todo - verify curator first
+router.put('/:id', (req, res, next) => { // todo - verify curator first?
     const id = req.params.id
     //Snippet.findByIdAndUpdate(
-    Snippet.findOneAndUpdate( // todo - handle Orgs too (hb User?)
+    Snippet.findOneAndUpdate(
         //{id: req.params.id},
         {_id: id},
         {
-            title: req.body.title, // todo - proper fields for snippet/org/user
-            url: req.body.url
+            data: req.body.data,
+            tags: req.body.tags,
+            src: req.body.src,
+            curator: req.body.curator // todo - session user (curator)
         },
         {new: true}
     )
     .then(snippet => res.json(snippet))
+    .then(console.log('^ snippet updated ^'))
+    //todo - 0redirect after update?
     .catch(next)
 })
 
@@ -58,6 +61,8 @@ router.put('/:id', (req, res, next) => { // todo - verify curator first
 router.delete("/:id", (req, res, next) => {
     Snippet.findByIdAndRemove(req.params.id)
     .then(snippet => res.json(snippet))
+    .then(console.log('^ snippet destroyed ^'))
+    .then(res.redirect('index')) // todo - fix path
     .catch(next)
 })
 

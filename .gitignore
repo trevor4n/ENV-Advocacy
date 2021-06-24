@@ -14,3 +14,7 @@ node_modules/
 
 # VSCode Settings (Peacock)
 .vscode
+
+# Security
+config/
+keys.js
