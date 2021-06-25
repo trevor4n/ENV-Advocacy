@@ -18,7 +18,7 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:'+port+'/auth/google/redirect'
 },
 (accessToken, refreshToken, profile, done) => {
-    console.log(profile)
+    //console.log(profile)
     // user = await User.findOneAndUpdate(
     //     { email: profile.emails[0].value },
     //     { googleId: profile.id },
@@ -31,7 +31,7 @@ passport.use(new GoogleStrategy({
             done(null, currentUser)
         else{
             new User({googleId: profile.id}).save()
-            .then(newUser => {done(null, newUser)})
+            .then(newUser => {done(null, newUser)}) //callback signaling to passport that user access is complete
         }
     })
     // */
@@ -71,38 +71,50 @@ app.use('/user/', userController)
 //end controllers
 
 
+
 app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email'],
+    scope : ['profile', 'email'],
     prompt : "select_account" 
 }))
 
-//app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/snippet'}), (req, res) => {
-app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res) => { // stretch - route the user back to the login page if the login page has a back button to home
-    //console.log(res)
-    res.send(req.user)
+app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - route the user back to the login page if the login page has a back button to home
+// app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - route the user back to the login page if the login page has a back button to home
+    // console.log('here ')
+    // res.send(req.user)
     //res.send('reached redirect URI')
     // then redirect
     //res.redirect('/')
-    console.log(req.user)
-    res.redirect('/')
-    res.render('index', {curator: user.curator})
+    //console.log(req.user)
+    //let u = req.user
+    //res.render('index', {user: req.user, curator: user.curator})
+    //console.log('curator: ' + res.curator)
+    //res.render('index', {curator: req.user.curator}) // FIX
+    res.render('index', {user: req.user}) // FIX
+    //return res.redirect('/')
+    //res.redirect('/')
 })
 
 app.get('/auth/logout', (req, res) => {
     //console.log(res)
     req.logout()
+    /*
+    req.session.destroy()
+    res.clearCookie("connect.sid")
+    */
     //res.send(req.user)
     res.redirect('/')
 })
 
-app.set('view engine', 'ejs')
-app.set('port', process.env.PORT || 4200)
-
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode || 500
     const message = err.message || 'Internal Server Error'
-    res.status(statusCode).send(message)
+    //res.status(statusCode).send(message)
+    //console.log(res.status(statusCode))
+    console.log(statusCode)
 })
+
+app.set('view engine', 'ejs')
+app.set('port', process.env.PORT || 4200)
 
 app.listen(app.get('port'), () => {
     console.log(`✅ PORT: ${app.get('port')} 🌟`)
@@ -110,3 +122,4 @@ app.listen(app.get('port'), () => {
 
 //app.get('/', (req, res) => {res.send(`You've reached the ENV-Advocacy index. </br> Navigate to the '/snippet/:id' path for routing`)})
 //app.get('/', (req, res) => {res.redirect('/snippet')})
+app.get('/', (req, res) => {res.render('index')})

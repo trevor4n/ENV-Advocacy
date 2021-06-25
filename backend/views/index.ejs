@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%- include('partials/header') %> 
-</head>
+<%- include('partials/header') %> 
+
 <body>
     <h1>ENV-Advocacy</h1>
-    <%- include('partials/header') %> 
 
-    <%- include('partials/filters') %> 
+    <ul id="slide-out" class="sidenav">
+          <%# console.log('there:' + user.curator) %> 
+          <% if(locals.user)  { %>
+            <%# console.log('theres ' + user.curator) %>
+            <% if(user.curator) {%>
+              <li><div class="user-view">
+                <div class="background">
+                  <img src="200902_Lightroom_IMGP9088.jpg"> 
+                </div>
+                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+                <a href="#name"><span class="white-text name">username <%= curator %> </span></a>
+                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+
+              <li><div class="divider"></div></li>
+
+              <li><a class="subheader">Curator Hub</a></li>
+              <li><a class="waves-effect" href="#!">Create</a></li>
+              <li><a class="waves-effect" href="#!">Update</a></li>
+              <li><a class="waves-effect" href="#!">Destroy</a></li>
+
+              <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li
+            <% } %> 
+            <% } else {%> 
+          <!-- if not logged in -->
+          <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
+          <% } %> 
+          <!-- either way -->
+          <!-- <li><div class="divider"></div></li> -->
+        </div></li>               
+
+        <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+      </ul>
+      <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html> 

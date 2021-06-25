@@ -6,7 +6,15 @@
     background: rgb(253,187,45);
     background: radial-gradient(circle, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 96%);
 }
+header, main, footer {
+    padding-left: 300px;
+  }
 
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  }
 body {
     margin: 0;
     font-family: 'PT Sans', sans-serif;
@@ -27,6 +35,17 @@ body {
     text-align: center;
     padding: 2vh;
     height: 20vh;
+}
+
+.sidenav-header {
+    background: url("../images/200902_Lightroom_IMGP9088.jpg") no-repeat center center;
+    background-size: cover;
+    margin-bottom: 0px;
+    padding: 15px 0 0 15px;
+
+}
+.sidenav-header .row {
+    margin-bottom: 0;
 }
 
 .noselect { /* https://stackoverflow.com/a/9314458/3911210 */

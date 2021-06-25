@@ -1,8 +1,13 @@
 <ul id="slide-out" class="sidenav">
     <li><div class="user-view"> <!-- should i create a guest view or use logic here?-->
       <div class="background">
-        <img src="images/office.jpg">
+        <!-- <img src="images/office.jpg"> -->
       </div>
+      <% if (user.curator) { %> 
+          <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
+        <a href="#name"><span class="white-text name">username <%= user.curator %> </span></a>
+        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+      <% } %> 
       <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
       <a href="#name"><span class="white-text name">John Doe</span></a>
       <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
