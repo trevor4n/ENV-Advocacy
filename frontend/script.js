@@ -27,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-// var collapsibleElem = document.querySelector('.collapsible');
-// var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-
-var instance = M.Sidenav.getInstance(elem);
+var collapsibleElem = document.querySelector('.collapsible');
+var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
 
 // stretch - Using MDC Web with Sass and ES2015 https://material.io/develop/web/getting-started

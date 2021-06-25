@@ -6,15 +6,7 @@
     background: rgb(253,187,45);
     background: radial-gradient(circle, rgba(253,187,45,1) 0%, rgba(34,193,195,1) 96%);
 }
-header, main, footer {
-    padding-left: 300px;
-  }
 
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-  }
 body {
     margin: 0;
     font-family: 'PT Sans', sans-serif;
@@ -24,6 +16,20 @@ body {
     box-sizing: border-box; 
 }
 
+/* header, main, footer {
+    padding-left: 300px;
+  }
+
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  } */
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+}
+  
 .wrap{
     display: -webkit-box;
     display: -moz-box;
@@ -36,6 +42,18 @@ body {
     padding: 2vh;
     height: 20vh;
 }
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
 
 .sidenav-header {
     background: url("../images/200902_Lightroom_IMGP9088.jpg") no-repeat center center;
