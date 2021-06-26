@@ -1,6 +1,7 @@
 const wrap = document.querySelector('.wrap')
 var nav = M.Sidenav.getInstance(elem)
 
+var flag = 'blank'
 function genFilters(){
     // compile an array (key value pairs) of tags from Snippet
 
@@ -13,18 +14,31 @@ function genFilters(){
 }
 
 //genFilters()
+function getStarted(){
+    if(document.readyState === 'loading'){ //still loading
+        setTimeout(getStarted(), 1000)
+    } else{
+        flag = 'green'
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            //var instances = M.Sidenav.init(elems, options);
+            var instances = M.Sidenav.init(elems);
+        
+            // todo - is the below already taken care of by sidenav-close li tag?
+            // if(nav.isOpen)
+            //     nav.close()
+            // else
+            //     nav.open()
+            //let hamburgerMenu = document.getElementsByClassName('.sidenav-trigger')
+            let hamburgerMenu = document.getElementsByClassName('.sidenav-trigger')
+            hamburgerMenu.addEventListener('click', () => {
+                hamburgerMenu.sidenav()
+            })
+        });
+    }
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    //var instances = M.Sidenav.init(elems, options);
-    var instances = M.Sidenav.init(elems);
 
-    // todo - is the below already taken care of by sidenav-close li tag?
-    // if(nav.isOpen)
-    //     nav.close()
-    // else
-    //     nav.open()
-});
 
 // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
 var collapsibleElem = document.querySelector('.collapsible');

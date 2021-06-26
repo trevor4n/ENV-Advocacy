@@ -1,20 +1,24 @@
 <%- include('partials/header') %> 
+  <body>
+    <nav>
+      <!-- <div class="nav-wrapper">-->
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+        <a href="/" class="brand-logo" target="_self">Environmental Advocacy Hub</a>
 
-<body>
-    <h1>ENV-Advocacy</h1>
-
-    <ul id="slide-out" class="sidenav">
+        <!-- <ul id="slide-out" class="sidenav show-on-large> -->
+        <ul id="mobile-demo" class="sidenav show-on-large>
           <%# console.log('there:' + user.curator) %> 
           <% if(locals.user)  { %>
             <%# console.log('theres ' + user.curator) %>
-            <% if(user.curator) {%>
-              <li><div class="user-view">
-                <div class="background">
-                  <img src="200902_Lightroom_IMGP9088.jpg"> 
+            <% if(user.curator) { %>
+              <li>
+                <div class="user-view">
+                  <div class="background"><img src="200902_Lightroom_IMGP9088.jpg"></div>
+                  <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
+                  <a href="#name"><span class="white-text name">username <%= curator %> </span></a>
+                  <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
                 </div>
-                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-                <a href="#name"><span class="white-text name">username <%= curator %> </span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+              </li>
 
               <li><div class="divider"></div></li>
 
@@ -23,22 +27,141 @@
               <li><a class="waves-effect" href="#!">Update</a></li>
               <li><a class="waves-effect" href="#!">Destroy</a></li>
 
-              <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li
+              <li><div class="divider"></div></li>
+
+              <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
+            <% } else { %> 
+              <!-- if not logged in as a curator -->
+              <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
             <% } %> 
-            <% } else {%> 
-          <!-- if not logged in -->
-          <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
+            <!-- user exists in locals here -->
           <% } %> 
+          <!-- if user does not exist in locals yet -->
           <!-- either way -->
-          <!-- <li><div class="divider"></div></li> -->
-        </div></li>               
+          <li><div class="divider"></div></li>
+          <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+        </ul>
 
-        <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-      </ul>
-      <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+        <ul class="right">
+          <li><a href="https://github.com/trevor4n/ENV-Advocacy" target="_blank">Look under the hood</a></li>
+          <li><a href="http://github.com/trevor4n" target="_blank">Find me on GitHub</a></li>
+        </ul>
+      <!-- </div>  -->
+    </nav>
 
-      <!-- Compiled and minified JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="../../frontend/script.js"></script>
-</body>
+    <main>
+      <div id="d1"> <!-- todo - d1 should probably be closeable like a notification -->
+        <!-- set the tone / attitude -->
+        <div class="container1">
+          <p> ~ Welcome! <br> I recently started collecting interesting environmental data. I've also started breaking it down into bite-size pieces.  My goal is building a hub that matches visitors like you with info that really captures your attention!  I've even included filters enabling you to choose intesectional topics. </p>
+        </div>
+        
+        <!--div class="container2">
+          <p> ~ Everything is under construction! <br> I'm a firm advocate of embracing technincal research, but I also know how hectic life can get. We don't all have time to deep dive into everything. Just like the weather, data can get overwealming... sheesh even tackling a project of this scale hasn't been easy.  However, lately I've really started investing my time building out a journey for each visitor. Better late than never as they say! That said, its important to keep in mind that unlike local weather patterns which we casually notice, the climate of our planet carries momentum. Thats exactly why our choices today can have such a powerful impact. Information can empower our all of decisions. </p>
+        </div-->
+
+        <!-- div class="container3">
+          <p> ~ Consider contributing! <br> First and foremost I feel a duty to build my vision for this hub, but the creation process takes time. Lately between structure, ux, and seeding I've found my time spread quite thin. Unlike a notes app, its vital that I find time to upload that which I've collected, but its also a very hands on process... That's just one reason why its important to open up curator roles, enabling likeminded individuals to share information and organizations that they're passionate about too! <a href="/#!" target="_self">Apply to join the curator crew today!</a> </p>
+        </div-->
+      </div>
+
+      <!-- todo - philosophical, motivational greeting/quote (possibly always shown) -->
+
+      <div class="d2">
+        <div class="desc"> Let's start with something that might peak your interest: </div>
+        <!-- tdoo - filter chips section -->
+        <!-- pin icon --> <button id="filter"> Filter </button>
+      </div>
+
+      <div id="d3">
+        <div class="desc"> Just for you: </div>
+        <div id="snippet"> Snippet Here </div>
+        <!-- binoculars icon --> <button id="reRoll"> Curate something else </button>
+        <!-- magnifying glass icon --> <button id="snippetSelect"> What can I do? </button>
+      </div>
+
+      <div id="d4">
+        <div id="p1"> Direct from the source... <br> learn more </div> <!-- waterfall -->
+        <!-- todo snippet src link -->
+        <div id="p2">Connect <br> with organizations right up your alley</div> <!-- tree roots -->
+        <div id="p3"> Share our snippet <br> so your friends can find our hub</div> <!-- wave -->
+      </div>
+
+      <div id="d5">
+        <div id="org1"> <!-- based oon filter & snippet tags -->
+          logo & Name 
+          <button>Check em out!</button>
+
+          <!-- todo - display small grey lowkey tags -->
+        </div>
+
+        <div id="org2"> <!-- based oon filter & snippet tags -->
+          logo & Name 
+          <button>Check em out!</button>
+
+          <!-- todo - display small grey lowkey tags -->
+        </div>
+
+        <!-- todo - blunt vertical divider  -->
+
+        <div id="org3"> <!-- based on popular tags -->
+          logo & Name 
+          <button>Check em out!</button>
+
+          <!-- todo - display small grey lowkey tags -->
+        </div>
+      </div>
+      
+      <div>
+        <!-- stretch - progress bar or scroll indicator -->
+      </div>
+
+      <!-- stretch - personal accountability -->
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5><a class="white-text" href="/">E.A.H.</a></h5>
+            <!-- stretch - eah logo -->
+            <p class="grey-text text-lighten-4">Best wishes on your advocacy journey!</p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Powered by</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Materialize</a></li>
+              <li><a class="white-text" href="#!">EJS</a></li>
+              <li><a class="white-text" href="#!">Mongoose</a></li>
+              <li><a class="white-text" href="#!">Node</a></li>
+              <li><a class="white-text" href="#!">Express</a></li>
+              <li><a class="white-text" href="#!">JavaScript</a></li>
+              <li><a class="white-text" href="#!">CSS</a></li>
+            </ul>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">Also...</h5>
+            <ul>
+              <li><a class="white-text" href="#!">Deployed with Heroku</a></li>
+              <li><a class="white-text" href="#!">Hosted on GitHub</a></li>
+              <li><a class="white-text" href="#!">MVC Structure</a></li>
+              <li><a class="white-text" href="#!">RESTful routing & CRUD</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container"> Created by 
+          <a class="blue-text text-lighten-3" href="https://www.linkedin.com/in/trevorforen/" target="_blank">Trevor Foren</a>
+        <a class="grey-text text-lighten-4 right" href="/#!">Provide Feedback</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- <script src="../../frontend/init.js"></script> -->
+    <script src="../../frontend/script.js"></script>
+  </body>
 </html> 

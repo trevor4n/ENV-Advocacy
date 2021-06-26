@@ -10,13 +10,17 @@
 body {
     margin: 0;
     font-family: 'PT Sans', sans-serif;
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-*{
+* {
     box-sizing: border-box; 
 }
 
-/* header, main, footer {
+header, main, footer {
     padding-left: 300px;
   }
 
@@ -24,12 +28,18 @@ body {
     header, main, footer {
       padding-left: 0;
     }
-  } */
+  }
 
-.main {
+main {
     margin-left: 200px; /* Same as the width of the sidenav */
+    flex: 1 0 auto;
 }
-  
+
+/* footer {
+    position: fixed;
+    bottom: 0;
+} */
+
 .wrap{
     display: -webkit-box;
     display: -moz-box;
