@@ -1,6 +1,7 @@
 // const wrap = document.querySelector('.wrap')
 //var nav = M.Sidenav.getInstance(document)
-var hamburgerMenu = document.querySelector('.sidenav-trigger')
+// var hamburgerMenu = document.querySelector('.sidenav-trigger')
+var hamburgerMenu = null
 
 // var flag = 'blank'
 
@@ -18,13 +19,14 @@ function getStarted(){
         // flag = 'green'
         document.addEventListener('DOMContentLoaded', function() {
             //console.log('dom loaded')
-            var elems = document.querySelectorAll('.sidenav');
+            hamburgerMenu = document.querySelector('.sidenav-trigger');
             //var instances = M.Sidenav.init(elems, options);
-            var instances = M.Sidenav.init(elems)
+            let instance = M.Sidenav.init(hamburgerMenu)
 
+            // elem.addEventListener('click', () => {
             hamburgerMenu.addEventListener('click', () => {
                 // console.log('e ' + e)
-                hamburgerMenu.sidenav()
+                instance.sidenav()
             })
         }) 
     // }

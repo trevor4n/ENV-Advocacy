@@ -21,3 +21,6 @@ keys.js
 
 # Prettier
 .prettierrc
+
+# BKP
+bkp.js
