@@ -1,7 +1,7 @@
 // const wrap = document.querySelector('.wrap')
-//var nav = M.Sidenav.getInstance(document)
+// var nav = M.Sidenav.getInstance(document)
 // var hamburgerMenu = document.querySelector('.sidenav-trigger')
-var hamburgerMenu = null
+// var hamburgerMenu = null
 
 // var flag = 'blank'
 
@@ -19,14 +19,15 @@ function getStarted(){
         // flag = 'green'
         document.addEventListener('DOMContentLoaded', function() {
             //console.log('dom loaded')
-            hamburgerMenu = document.querySelector('.sidenav-trigger');
-            //var instances = M.Sidenav.init(elems, options);
-            let instance = M.Sidenav.init(hamburgerMenu)
+            var elem = document.querySelector('.sidenav')
+            //var instances = M.Sidenav.init(elems, options)
+            var instance = M.Sidenav.init(elem)
+            // hamburgerMenu = instance
 
-            // elem.addEventListener('click', () => {
-            hamburgerMenu.addEventListener('click', () => {
+            instance.addEventListener('click', () => {
                 // console.log('e ' + e)
-                instance.sidenav()
+                // hamburgerMenu.sidenav()
+                instance.open()
             })
         }) 
     // }

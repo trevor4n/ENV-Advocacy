@@ -20,7 +20,8 @@ body {
     box-sizing: border-box; 
 }
 
-header, main, footer {
+/* Fixed HTML Structure */
+/* header, main, footer {
     padding-left: 300px;
   }
 
@@ -28,7 +29,7 @@ header, main, footer {
     header, main, footer {
       padding-left: 0;
     }
-  }
+  } */
 
 main {
     margin-left: 200px; /* Same as the width of the sidenav */
