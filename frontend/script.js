@@ -15,10 +15,11 @@ function genFilters(){
 
 //genFilters()
 function getStarted(){
-    if(document.readyState === 'loading'){ //still loading
-        setTimeout(getStarted(), 1000)
-    } else{
+    // if(document.readyState === 'loading'){ //still loading
+    //     setTimeout(getStarted(), 1000)
+    // } else{
         flag = 'green'
+        console.log('tst')
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.sidenav');
             //var instances = M.Sidenav.init(elems, options);
@@ -31,14 +32,15 @@ function getStarted(){
             //     nav.open()
             //let hamburgerMenu = document.getElementsByClassName('.sidenav-trigger')
             let hamburgerMenu = document.getElementsByClassName('.sidenav-trigger')
-            hamburgerMenu.addEventListener('click', () => {
-                hamburgerMenu.sidenav()
+            hamburgerMenu.addEventListener('click', (e) => {
+                console.log('e ' + e)
+                e.sidenav()
             })
         });
-    }
+    // }
 }
 
-
+getStarted() //kms
 
 // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
 var collapsibleElem = document.querySelector('.collapsible');

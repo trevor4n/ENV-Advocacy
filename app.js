@@ -4,9 +4,9 @@ const ejs = require('ejs')
 const app = express()
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const keys = require('./config/keys')
+const keys = require('./backend/config/keys')
 const mongoose = require('mongoose')
-const User = require('./models/user')
+const User = require('./backend/models/user')
 const session = require('express-session')
 
 const port = 4200
@@ -55,18 +55,22 @@ app.use(session({
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+// console.log("big d name" + __dirname)
+//app.use(express.static(__dirname + "/public"))
+app.use('/public',express.static('public'))
+//app.use('/public', express.static(__dirname + '/public'));
 app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 
 //start controllers (after middleware)
-const snippetController = require('./controllers/snippet')
+const snippetController = require('./backend/controllers/snippet')
 app.use('/snippet/', snippetController)
 
-const orgController = require('./controllers/org')
+const orgController = require('./backend/controllers/org')
 app.use('/org/', orgController)
 
-const userController = require('./controllers/user')
+const userController = require('./backend/controllers/user')
 app.use('/user/', userController)
 //end controllers
 
