@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%- include('partials/header') %> 
-</head>
-<body>
+<%- include('partials/header') %> 
+  <body>
     <h1>ENV-Advocacy</h1>
-    <a href="/auth/google">Sign In with Google</a>
+    <p> loaded show.ejs </p>
 
     <%- include('partials/filters', {tags, tags}) %> 
 
     <div><%= data %></div>
-
-    <button class="mdc-button foo-button">
-        <div class="mdc-button__ripple"></div>
-        <span class="mdc-button__label">Button</span>
-    </button>
-</body>
+  </body>
 </html>

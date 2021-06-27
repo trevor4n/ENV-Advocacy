@@ -5,49 +5,53 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
         <a href="/" class="brand-logo" target="_self">Environmental Advocacy Hub</a>
 
-        <!-- <ul id="slide-out" class="sidenav show-on-large> -->
-        <ul id="mobile-demo" class="sidenav show-on-large>
-          <%# console.log('there:' + user.curator) %> 
-          <% if(locals.user)  { %>
-            <%# console.log('theres ' + user.curator) %>
-            <% if(user.curator) { %>
-              <li>
-                <div class="user-view">
-                  <div class="background"><img src="200902_Lightroom_IMGP9088.jpg"></div>
-                  <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
-                  <a href="#name"><span class="white-text name">username <%= curator %> </span></a>
-                  <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-                </div>
-              </li>
-
-              <li><div class="divider"></div></li>
-
-              <li><a class="subheader">Curator Hub</a></li>
-              <li><a class="waves-effect" href="#!">Create</a></li>
-              <li><a class="waves-effect" href="#!">Update</a></li>
-              <li><a class="waves-effect" href="#!">Destroy</a></li>
-
-              <li><div class="divider"></div></li>
-
-              <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
-            <% } else { %> 
-              <!-- if not logged in as a curator -->
-              <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
-            <% } %> 
-            <!-- user exists in locals here -->
-          <% } %> 
-          <!-- if user does not exist in locals yet -->
-          <!-- either way -->
-          <li><div class="divider"></div></li>
-          <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-        </ul>
-
         <ul class="right">
           <li><a href="https://github.com/trevor4n/ENV-Advocacy" target="_blank">Look under the hood</a></li>
           <li><a href="http://github.com/trevor4n" target="_blank">Find me on GitHub</a></li>
         </ul>
       <!-- </div>  -->
     </nav>
+
+
+
+    <!-- <ul id="slide-out" class="sidenav show-on-large> -->
+      <ul id="mobile-demo" class="sidenav show-on-large>
+        <%# console.log('there:' + user.curator) %> 
+        <% if(locals.user)  { %>
+          <%# console.log('theres ' + user.curator) %>
+          <% if(user.curator) { %>
+            <li>
+              <div class="user-view">
+                <div class="background"><img src="200902_Lightroom_IMGP9088.jpg"></div>
+                <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
+                <a href="#name"><span class="white-text name">username <%= curator %> </span></a>
+                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+              </div>
+            </li>
+
+            <li><div class="divider"></div></li>
+
+            <li><a class="subheader">Curator Hub</a></li>
+            <li><a class="waves-effect" href="#!">Create</a></li>
+            <li><a class="waves-effect" href="#!">Update</a></li>
+            <li><a class="waves-effect" href="#!">Destroy</a></li>
+
+            <li><div class="divider"></div></li>
+
+            <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
+          <% } else { %> 
+            <!-- if not logged in as a curator -->
+            <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
+          <% } %> 
+          <!-- user exists in locals here -->
+        <% } %> 
+        <!-- if user does not exist in locals yet -->
+        <!-- either way -->
+        <li><div class="divider"></div></li>
+        <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
+      </ul>
+
+
 
     <main>
       <div id="d1"> <!-- todo - d1 should probably be closeable like a notification -->
@@ -121,44 +125,9 @@
       <!-- stretch - personal accountability -->
     </main>
 
-    <footer class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5><a class="white-text" href="/">E.A.H.</a></h5>
-            <!-- stretch - eah logo -->
-            <p class="grey-text text-lighten-4">Best wishes on your advocacy journey!</p>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Powered by</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Materialize</a></li>
-              <li><a class="white-text" href="#!">EJS</a></li>
-              <li><a class="white-text" href="#!">Mongoose</a></li>
-              <li><a class="white-text" href="#!">Node</a></li>
-              <li><a class="white-text" href="#!">Express</a></li>
-              <li><a class="white-text" href="#!">JavaScript</a></li>
-              <li><a class="white-text" href="#!">CSS</a></li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Also...</h5>
-            <ul>
-              <li><a class="white-text" href="#!">Deployed with Heroku</a></li>
-              <li><a class="white-text" href="#!">Hosted on GitHub</a></li>
-              <li><a class="white-text" href="#!">MVC Structure</a></li>
-              <li><a class="white-text" href="#!">RESTful routing & CRUD</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container"> Created by 
-          <a class="blue-text text-lighten-3" href="https://www.linkedin.com/in/trevorforen/" target="_blank">Trevor Foren</a>
-        <a class="grey-text text-lighten-4 right" href="/#!"><i class="tiny material-icons">lightbulb_outline</i> Provide Feedback</a>
-        </div>
-      </div>
-    </footer>
+
+    
+    <%- include('partials/footer') %> 
 
     <!-- Compiled and minified JavaScript -->
     <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->

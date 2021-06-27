@@ -3,9 +3,8 @@ const router = express.Router()
 
 const Org = require('../models/org')
 
-
 //Index
-router.get('/', (req, res, next) => {
+router.get('/', (req, res, next) => { // todo - verify curator
     Org.find({})
     .populate('curator')
     .then( orgs => {
@@ -15,37 +14,34 @@ router.get('/', (req, res, next) => {
         return tagSet
     })
     //.then(orgs => res.json(orgs))
-    
     .then(tagSet => res.render('index', {tags: tagSet})) // ejs detects dir and extension
     .catch(next) // stretch - read https://expressjs.com/en/guide/routing.html#route-methods
 })
 
-
 //Show / Detail
-router.get("/:id", (req, res, next) => {
+router.get("/:id", (req, res, next) => { // todo - verify curator
     Org.findById(req.params.id)
     .populate('curator')
     .then(org => res.render('show', {name: org.name, logo: org.logo, tags: org.tags, url: org.url, curator: org.curator}))  
     // .then(org => res.json(org))
+    // todo - review redirect path
     .catch(next)
 })
 
 //Create
-router.post("/", (req, res, next) => {
+router.post("/", (req, res, next) => { // todo - verify curator
     Org.create(req.body)
     .then(org => res.json(org))
     .then(console.log('^ org create ^'))
-    .then(res.redirect('index')) // todo - fix path
+    .then(res.redirect('index')) // todo - review redirect path
     .catch(next)
 })
 
 //Update - put
-router.put('/:id', (req, res, next) => { // todo - verify curator first?
+router.put('/:id', (req, res, next) => { // todo - verify curator
     const id = req.params.id
-    //Org.findByIdAndUpdate(
     Org.findByIdAndUpdate(
-        //{id: req.params.id},
-        {_id: id},
+        {_id: id}, // todo - review underscore
         {
             name: req.body.name,
             logo: req.body.logo,
@@ -57,16 +53,16 @@ router.put('/:id', (req, res, next) => { // todo - verify curator first?
     )
     .then(org => res.json(org))
     .then(console.log('^ org updated ^'))
-    //todo - 0redirect after update?
+    // todo - review redirect path
     .catch(next)
 })
 
 //Destroy
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => { // todo - verify curator
     Org.findByIdAndRemove(req.params.id)
     //.then(org => res.json(org))
     .then(console.log('^ org destroyed ^'))
-    .then(res.redirect('/')) // todo - fix path
+    .then(res.redirect('/')) // todo - review redirect path
     .catch(next)
 })
 

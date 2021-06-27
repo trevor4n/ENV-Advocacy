@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const mongoURI = process.env.NODE_ENV === 'production' ? process.env.DB_URL : 'mongodb://localhost/ENV-Advocacy'
+const mongoURI = process.env.NODE_ENV === 'production' ? process.env.DB_URL : 'mongodb://localhost/ENV-Advocacy' // todo - db route reminder
 
 mongoose.connect(mongoURI, { //connect method is asynchronous
     useNewUrlParser: true,

@@ -46,7 +46,7 @@ passport.deserializeUser((id, done) => {
     })
 })
 app.use(session({
-    //we like express-session default cookie values
+    //  express-session default cookie values 🖤
     secret: keys.session.sessionKey,
     maxAge: 1000*60*60 //expires in one hour (ms)
 }))
@@ -55,15 +55,12 @@ app.use(session({
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-// console.log("big d name" + __dirname)
-//app.use(express.static(__dirname + "/public"))
 app.use('/public',express.static('public'))
-//app.use('/public', express.static(__dirname + '/public'));
 app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 
-//start controllers (after middleware)
+// START - controllers (after middleware)
 const snippetController = require('./backend/controllers/snippet')
 app.use('/snippet/', snippetController)
 
@@ -72,40 +69,26 @@ app.use('/org/', orgController)
 
 const userController = require('./backend/controllers/user')
 app.use('/user/', userController)
-//end controllers
-
-
+// END - controllers
 
 app.get('/auth/google', passport.authenticate('google', {
     scope : ['profile', 'email'],
     prompt : "select_account" 
 }))
 
-app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - route the user back to the login page if the login page has a back button to home
-// app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - route the user back to the login page if the login page has a back button to home
-    // console.log('here ')
-    // res.send(req.user)
-    //res.send('reached redirect URI')
-    // then redirect
-    //res.redirect('/')
-    //console.log(req.user)
-    //let u = req.user
-    //res.render('index', {user: req.user, curator: user.curator})
-    //console.log('curator: ' + res.curator)
-    //res.render('index', {curator: req.user.curator}) // FIX
-    res.render('index', {user: req.user}) // FIX
-    //return res.redirect('/')
-    //res.redirect('/')
+// todo - below has issues with X-Frame-Options header (associated w/ yt from other window tho?)
+app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
+// app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
+    //console.log('curator: ' + res.user.curator)
+    res.render('index', {user: req.user})
+    // return res.redirect('/')
+    res.redirect('/')
 })
 
-app.get('/auth/logout', (req, res) => {
-    //console.log(res)
+app.get('/auth/logout', (req, res) => { // todo - verify req or res below
     req.logout()
-    /*
-    req.session.destroy()
-    res.clearCookie("connect.sid")
-    */
-    //res.send(req.user)
+    // req.session.destroy()
+    // res.clearCookie("connect.sid")
     res.redirect('/')
 })
 
@@ -126,4 +109,4 @@ app.listen(app.get('port'), () => {
 
 //app.get('/', (req, res) => {res.send(`You've reached the ENV-Advocacy index. </br> Navigate to the '/snippet/:id' path for routing`)})
 //app.get('/', (req, res) => {res.redirect('/snippet')})
-app.get('/', (req, res) => {res.render('index')})
+app.get('/', (req, res) => {res.render('index')}) // not interfering w/ auth redirect
