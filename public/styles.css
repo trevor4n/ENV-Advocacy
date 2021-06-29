@@ -36,11 +36,22 @@ main {
     flex: 1 0 auto;
 }
 
-/* footer {
-    position: fixed;
-    bottom: 0;
-} */
+nav {
+    background-color: #718b9f !important;
+}
 
+footer {
+    background-color: #718b9f !important;
+    /* position: fixed;
+    bottom: 0; */
+}
+
+.subheader {
+    /* color: #d3b99e !important; */
+    color: #e6b17f !important;
+    /* color: #ff9891 !important; */
+
+}
 .wrap{
     display: -webkit-box;
     display: -moz-box;
@@ -53,7 +64,6 @@ main {
     padding: 2vh;
     height: 20vh;
 }
-
 .sidenav {
     height: 100%;
     width: 200px;
@@ -61,22 +71,28 @@ main {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    /* background-color: #ee6e73; */
+    background-color: #718b9f !important;
     overflow-x: hidden;
     padding-top: 20px;
+    color: black;
   }
-
-.sidenav-header {
-    background: url("../images/200902_Lightroom_IMGP9088.jpg") no-repeat center center;
-    background-size: cover;
+.background {
+    /* background: url("/public/images/200902_Lightroom_IMGP9088.jpg") no-repeat center center; */
+    /* background-size: 100% 55vh; */
     margin-bottom: 0px;
     padding: 15px 0 0 15px;
-
+    color: white;
 }
 .sidenav-header .row {
     margin-bottom: 0;
 }
-
+.sidenav-overlay{
+    display: none !important;
+}
+.material-icons {
+    vertical-align: middle;
+}
 .noselect { /* https://stackoverflow.com/a/9314458/3911210 */
     -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */

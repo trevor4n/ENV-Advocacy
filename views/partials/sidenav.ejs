@@ -1,31 +1,42 @@
-<ul id="slide-out" class="sidenav">
-    <li><div class="user-view"> <!-- stretch logic vs guest-view -->
-      <div class="background">
-        <!-- <img src="images/office.jpg"> -->
-      </div>
-      <% if (user.curator) { %> 
-          <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
-        <a href="#name"><span class="white-text name">username <%= user.curator %> </span></a>
-        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-      <% } %> 
-      <!-- <a href="#user"><img class="circle" src="images/yuna.jpg"></a> -->
-      <a href="#name"><span class="white-text name">John Doe</span></a>
-      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-    </div></li>
-    <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li> -->
-    
-    <li><a class="subheader">Authentication</a></li>
-    <!-- if not logged in -->
-    <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
-    <!-- else logout  -->
-    <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Curator Hub</a></li>
-    <li><a class="waves-effect" href="#!">Create</a></li>
-    <li><a class="waves-effect" href="#!">Update</a></li>
-    <li><a class="waves-effect" href="#!">Destroy</a></li>
-    <!-- either way -->
-    <li><div class="divider"></div></li>
-    <li><a class="sidenav-close" href="#!">Clicking this will close Sidenav</a></li>
-  </ul>
-  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <!-- <ul id="slide-out" class="sidenav show-on-large> -->
+      <ul id="mobile-demo" class="sidenav show-on-large">
+
+
+        <% console.log( locals.user) %> 
+        <% if(locals.user)  { %>
+          <% if(!user.curator) { %> <!-- FIX - user flag -->
+            <%# console.log(user.curator) %>
+            <li>
+              <div class="user-view">
+                <div class="background">
+                  <img src="/public/images/200902_Lightroom_IMGP9088.jpg">
+                </div>
+                <!-- <a href="#name"><span class="white-text name">username <%= user.curator %> </span></a> -->
+                <span class="white-text name">~ WELCOME ~ <%= user.name %> </span>
+                <!-- <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a> -->
+               <span class="white-text email"> ~email~  </span>
+               <!-- fix - ^ ejsout email -->
+              </div>
+            </li>
+
+            <li><div class="divider"></div></li>
+
+            <li><a class="subheader">Curator Hub</a></li>
+            <li><a class="waves-effect" href="/snippet/"><i class="material-icons">content_cut</i>Snippets</a></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">business</i>Orgs</a></li>
+            <!-- <li><a class="waves-effect" href="#!">User Whitelist</a></li> -->
+
+            <li><div class="divider"></div></li>
+
+            <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
+          <% } else { %> 
+            <!-- if not logged in as a curator -->
+            <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
+          <% } %> 
+          <!-- user exists in locals here -->
+        <% } %> 
+        <!-- if user does not exist in locals yet -->
+        <!-- either way -->
+        <li><div class="divider"></div></li>
+        <li><a class="sidenav-close" href="#"><i class="material-icons">close</i>Close Menu</a></li>
+      </ul>

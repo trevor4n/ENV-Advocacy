@@ -1,36 +1,44 @@
-// const wrap = document.querySelector('.wrap')
 // var nav = M.Sidenav.getInstance(document)
 // var hamburgerMenu = document.querySelector('.sidenav-trigger')
 // var hamburgerMenu = null
 
-// var flag = 'blank'
+// if(document.readyState !== 'loading'){ //still loading
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log(`🌟 DOM loaded ✅`)
 
-// function genFilters(){
-//     // compile an array (key value pairs) of tags from Snippet
-//     // remove duplicates
-//     // for each tag create an li
-//     // give each tag a checkbox (defaulted to unchecked)
-//     // checking tabs should enable their value
-//     // call another helper function to selectSnippet using the array as a reference from the Snippet model
+        M.AutoInit() // ref - https://materializecss.com/auto-init.html
+
+        var elem = document.querySelector('.sidenav')
+        //var instances = M.Sidenav.init(elems, options)
+        // var instance = M.Sidenav.init(elem, {})
+        var inst = M.Sidenav.getInstance(elem)
+        // hamburgerMenu = instance
+        //console.log(instance)
+
+        /*
+        elem.addEventListener('click', () => { // todo - ready?
+            // hamburgerMenu.sidenav()
+            // instance.sidenav()
+            console.log('isOpen', inst.isOpen)
+            if(!inst.isOpen()){
+                inst.open()
+                console.log('really?')
+            }
+            else{
+                inst.close()
+            }
+        })
+        */
+        var closeSidenav = document.querySelector('.sidenav-close')
+        var closeSidenavInstance = M.Sidenav.getInstance(closeSidenav)
+
+        /*
+        closeSidenavInstance.addEventListener('click', () => {
+            if(inst.isOpen())
+                inst.close()
+        })
+        */
+    }) 
 // }
 
-function getStarted(){
-    // if(document.readyState !== 'loading'){ //still loading
-        // flag = 'green'
-        document.addEventListener('DOMContentLoaded', function() {
-            //console.log('dom loaded')
-            var elem = document.querySelector('.sidenav')
-            //var instances = M.Sidenav.init(elems, options)
-            var instance = M.Sidenav.init(elem)
-            // hamburgerMenu = instance
-
-            instance.addEventListener('click', () => {
-                // console.log('e ' + e)
-                // hamburgerMenu.sidenav()
-                instance.open()
-            })
-        }) 
-    // }
-}
-
-setTimeout(getStarted(), 3000)
+// setTimeout(getStarted(), 1)

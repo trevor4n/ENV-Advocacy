@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const User = require('./backend/models/user')
 const session = require('express-session')
 
-const port = 4200
+const port = 4100
 
 // START - PassportJS Google OAuth 2.0
 passport.use(new GoogleStrategy({
@@ -25,13 +25,35 @@ passport.use(new GoogleStrategy({
     //     { upsert: true, new: true, setDefaultsOnInsert: true },
     //   )
     // /*
+    /*
     User.findOne({googleId: profile.id})
     .then(currentUser => {
         if(currentUser)
             done(null, currentUser)
         else{
-            new User({googleId: profile.id}).save()
+            new User({googleId: profile.id, curator: true, name: profile.name, email: profile.email}).save()
             .then(newUser => {done(null, newUser)}) //callback signaling to passport that user access is complete
+        }
+    })
+    */
+    User.findOne({googleId: profile.id})
+    .then(currentUser => {
+        if(!currentUser){
+            new User({googleId: profile.id, curator: true, name: profile.name, email: profile.email}).save()
+            .then(newUser => {done(null, newUser)}) //callback signaling to passport that user access is complete    
+        }        
+        else{
+            User.findOneAndUpdate(
+                {googleId: profile.id}, {
+                    googleId: profile.id, 
+                    curator: true, 
+                    name: profile.name, 
+                    email: profile.email                    
+                }, {
+                    new: true
+                }
+            )
+            done(null, currentUser)
         }
     })
     // */
@@ -62,13 +84,13 @@ app.use(passport.session())
 
 // START - controllers (after middleware)
 const snippetController = require('./backend/controllers/snippet')
-app.use('/snippet/', snippetController)
+app.use('/snippet', snippetController)
 
 const orgController = require('./backend/controllers/org')
-app.use('/org/', orgController)
+app.use('/org', orgController)
 
 const userController = require('./backend/controllers/user')
-app.use('/user/', userController)
+app.use('/user', userController)
 // END - controllers
 
 app.get('/auth/google', passport.authenticate('google', {
@@ -76,13 +98,13 @@ app.get('/auth/google', passport.authenticate('google', {
     prompt : "select_account" 
 }))
 
-// todo - below has issues with X-Frame-Options header (associated w/ yt from other window tho?)
-app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
-// app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
+// fix - chrome error: The page delivered both an 'X-Frame-Options' header and a 'Content-Security-Policy' header with a 'frame-ancestors' directive. Although the 'X-Frame-Options' header alone would have blocked embedding, it has been ignored.
+// app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
+app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
     //console.log('curator: ' + res.user.curator)
-    res.render('index', {user: req.user})
+    res.render('index', {user: req.user}, {cache: true})
     // return res.redirect('/')
-    res.redirect('/')
+    // res.redirect('/')
 })
 
 app.get('/auth/logout', (req, res) => { // todo - verify req or res below
@@ -101,10 +123,10 @@ app.use((err, req, res, next) => {
 })
 
 app.set('view engine', 'ejs')
-app.set('port', process.env.PORT || 4200)
+app.set('port', process.env.PORT || port)
 
 app.listen(app.get('port'), () => {
-    console.log(`✅ PORT: ${app.get('port')} 🌟`)
+    console.log(`🌟 PORT: ${app.get('port')} ✅`)
 })
 
-app.get('/', (req, res) => {res.render('index')}) // not interfering w/ auth redirect
+app.get('/', (req, res) => {res.render('index', {user: req.user})})
