@@ -7,9 +7,12 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const keys = require('./backend/config/keys')
 const mongoose = require('mongoose')
 const User = require('./backend/models/user')
+const Snippet = require('./backend/models/snippet')
 const session = require('express-session')
 
 const port = 4100
+let snipArray = []
+let snipOut = null
 
 // START - PassportJS Google OAuth 2.0
 passport.use(new GoogleStrategy({
@@ -39,20 +42,29 @@ passport.use(new GoogleStrategy({
     User.findOne({googleId: profile.id})
     .then(currentUser => {
         if(!currentUser){
-            new User({googleId: profile.id, curator: true, name: profile.name, email: profile.email}).save()
+            new User({googleId: profile.id, curator: true, name: profile.displayName, email: profile.emails[0].value}).save()
             .then(newUser => {done(null, newUser)}) //callback signaling to passport that user access is complete    
         }        
         else{
             User.findOneAndUpdate(
-                {googleId: profile.id}, {
-                    googleId: profile.id, 
+                {googleId: profile.id}, 
+                {
+                    googleId: profile.id,
                     curator: true, 
-                    name: profile.name, 
-                    email: profile.email                    
+                    name: profile.displayName, 
+                    email: profile.emails[0].value               
                 }, {
                     new: true
                 }
+                // ,(error, updatedUser) => {
+                //     console.log(updatedUser)
+                //     done(null, updatedUser)
+                // }
             )
+            // .then((error, updatedUser) => {
+            //     console.log(updatedUser)
+            //    return done(null, updatedUser)
+            // })
             done(null, currentUser)
         }
     })
@@ -77,7 +89,7 @@ app.use(session({
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/public',express.static('public'))
+app.use('/public',express.static('public')) // static server
 app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
@@ -101,8 +113,8 @@ app.get('/auth/google', passport.authenticate('google', {
 // fix - chrome error: The page delivered both an 'X-Frame-Options' header and a 'Content-Security-Policy' header with a 'frame-ancestors' directive. Although the 'X-Frame-Options' header alone would have blocked embedding, it has been ignored.
 // app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
 app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
-    //console.log('curator: ' + res.user.curator)
-    res.render('index', {user: req.user}, {cache: true})
+    console.log('curator: ' + req.user) 
+    //res.render('index', {user: req.user}, {cache: true}) // fix - req
     // return res.redirect('/')
     // res.redirect('/')
 })
@@ -129,4 +141,120 @@ app.listen(app.get('port'), () => {
     console.log(`🌟 PORT: ${app.get('port')} ✅`)
 })
 
-app.get('/', (req, res) => {res.render('index', {user: req.user})})
+app.get('/', (req, res, next) => {
+    if(req.user === undefined || req.user == null){
+        Snippet.find({})
+        .then( snippets => {
+            // console.log('snips',snippets)
+            //res.render('index', {user: req.user, snippets: snippets}) // stretch - the snippet data set could get big down the road
+            res.render('index', {snippets: snippets}) // stretch - the snippet data set could get big down the road
+        })
+    }
+    else if(req.user.curator){
+        Snippet.find({})
+            .then(function(docs){
+                snipArray = []
+                docs.forEach(function(doc){
+                    // console.log('doc::',doc)
+                    snipArray.push(doc)
+                })
+                console.log('snip array[0]::', snipArray[0].data)
+                snipOut = snipArray[0]
+                res.render('index', {user: req.user, snipsnip: snipOut}) // fix - req & removed {cache: true}
+        })
+    }
+})
+
+// START - HELPER CALLBACK FXs
+// function getSnip(s){
+//     snipArray.push(s)
+// }
+//END - HELPER CALLBACK FXs
+
+// START - EJS HELPERS  
+app.locals.getSnippetsHelper = function(usr){
+    //console.log(`usr: ${usr}`)
+    /*
+    if(usr === undefined || usr === null){
+        console.log('>>>not logged in<<<')
+        Snippet.find({})
+        .then(function(docs){
+            snipArray = []
+            docs.forEach(function(doc){
+                // console.log('doc::',doc)
+                snipArray.push(doc)
+            })
+            // console.log('snip array[0]::', snipArray[0].data)
+            // return snipArray[0]
+            snipOut = snipArray[0]
+            return snipOut
+        })
+    } else 
+    */
+    if(usr.reRolled === undefined || usr.reRolled.length == 0){ //logged in with no snippets seen 
+        //.sort // stretch
+        // Snippet.find().toArray() 
+        /*
+        Snippet.find({}).toArray().forEach( snip  => {
+            getSnip(snip)
+        })
+        
+        .then( snippets => {
+            console.log(`snipz1: ${snippets}`)
+        })
+        .catch()
+        */
+        /*
+        Snippet.find({})
+        .exec((err, snippets) => {
+            console.log(`snipz1: ${snippets}`)
+            let arr = []
+            snippets.forEach(snippet => {
+                arr.push(snippets) // ideally this just returns the first one
+            })
+            // randomSnippet = arr[0]
+            return arr[0]
+        })
+        */
+
+        Snippet.find({})
+        .then(function(docs){
+            snipArray = []
+            docs.forEach(function(doc){
+                // console.log('doc::',doc)
+                snipArray.push(doc)
+            })
+            // console.log('snip array[0]::', snipArray[0].data)
+            // return snipArray[0]
+            snipOut = snipArray[0]
+            return snipOut.data
+        })
+        /*
+        // stretch - prioritize tag matching, when finished add fx to else below
+        .then(snippets => {
+            snippets.forEach(snippet => {
+                let userTags = usr.tags
+                snippet.tags.forEach(tag => {
+                    if(userTags.contains(tag))
+                        snips.add(snippet)
+                })
+            })
+        })
+        */
+    } else { // logged in with snippets seen
+        console.log('zzzz')
+        // Snippet.find({_id: {$nin: usr.reRolled}, }) //find all exclusive of previously seen
+        Snippet.find({id: {$nin: usr.reRolled}})
+        .then( snippets => {
+            if((usr.reRolled.length > 0) && (snippets.length == 0)){
+                console.log(`⚠️ There are no remaining unique snippets to display`)
+                return null
+            }
+            else{
+                console.log(`nin: ${snippets}`)
+                return snippets[0] // send back a snippet
+            }
+        })
+    }
+}
+// END - EJS HELPERS

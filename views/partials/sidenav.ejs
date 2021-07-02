@@ -1,8 +1,6 @@
     <!-- <ul id="slide-out" class="sidenav show-on-large> -->
       <ul id="mobile-demo" class="sidenav show-on-large">
-
-
-        <% console.log( locals.user) %> 
+        <%# console.log( `User (scope - ejs): `, locals.user) %> 
         <% if(locals.user)  { %>
           <% if(!user.curator) { %> <!-- FIX - user flag -->
             <%# console.log(user.curator) %>
@@ -31,9 +29,11 @@
             <li><a href="/auth/logout"><i class="material-icons">logout</i>Logout</a></li>
           <% } else { %> 
             <!-- if not logged in as a curator -->
-            <li><a href="/auth/google"><i class="material-icons">login</i>Sign In With Google</a></li>
+            <li><a href="/auth/google"><i class="material-icons">login</i>Google login</a></li>
           <% } %> 
           <!-- user exists in locals here -->
+        <% } else { %> <!-- if no user exists -->
+          <li><a href="/auth/google"><i class="material-icons">login</i>Google login</a></li>
         <% } %> 
         <!-- if user does not exist in locals yet -->
         <!-- either way -->

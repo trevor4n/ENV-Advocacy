@@ -12,7 +12,14 @@
                   <img src="/public/images/200905_Lightroom_IMG_20200605_205647.jpg">
                   <!-- todo - filter chips section -->
                   <!-- <div class="fixed-action-btn">Filter<a class="btn-floating btn-large blue pulse" href="/#!" target="_self"><i class="large material-icons">filter_list</i></a></div> -->
-                  <span class="card-title"> *snippet placeholder* <%# snippet.data %> </span> <!-- TODO - snippet data -->
+                  <% if(locals.user){ %>
+                    <%# console.log( `>index.ejs>::locals.user::`, locals.user) %>
+                    <span class="card-title"> <%= snipsnip.data %> </span>
+                  <% } else { %>
+                    <%# stretch - even tho users arent logged in,  display unique random snippets %>
+                    <%# console.log('random snip 2:', randomSnip);  // not logged in %>
+                    <span class="card-title"> <%= snippets[Math.floor(Math.random()*snippets.length)].data %> </span> <!-- working before login-->
+                  <% } %> 
                   <a class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">autorenew</i></a>
                 </div>
                 <div class="card-content">
