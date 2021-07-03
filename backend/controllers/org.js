@@ -9,7 +9,6 @@ router.get('/', (req, res, next) => { // todo - verify curator
     .populate('curator')
     .then( orgs => {
         let tagSet = new Set()
-        console.log(orgs)
         orgs.forEach(org => { org.tags.forEach(tag => tagSet.add(tag))})
         return tagSet
     })

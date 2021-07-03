@@ -9,7 +9,6 @@ router.get('/', (req, res, next) => { // todo - verify curator/admin??
     .populate('curator')
     .then( users => {
         let tagSet = new Set()
-        console.log(users)
         users.forEach(user => { user.tags.forEach(tag => tagSet.add(tag))})
         return tagSet
     })
@@ -31,7 +30,7 @@ router.get("/:id", (req, res, next) => { // todo - verify curator/admin??
 router.post("/", (req, res, next) => { // todo - verify curator/admin??
     User.create(req.body)
     .then(user => res.json(user))
-    .then(console.log('^ user create ^'))
+    .then(console.log('^ user created ^'))
     .then(res.redirect('index')) // todo - review redirect path
     .catch(next)
 })

@@ -7,20 +7,8 @@ const Snippet = require('../models/snippet')
 router.get('/', (req, res, next) => { // todo - verify curator
     Snippet.find({})
     .populate('curator')
-    /*
-    .then( snippets => {
-        let tagSet = new Set()
-        // console.log("snippets")
-        // console.log(snippets)
-        // snippets.forEach(snippet => { snippet.tags.forEach(tag => tagSet.add(tag))}) // FIX - freezing
-        return tagSet
-    })
-    */
-    // .then(snippets => res.json(snippets))
-    // .then(console.log("Gonna render snippets now..."))
-    // .then((snippets, tagSet) => res.render('snippets', {user: req.user, snips: snippets, tags: tagSet})) // ejs detects dir and extension
     .then(snippets => res.render('partials/snippets', {user: req.user, snips: snippets})) // ejs detects dir and extension
-    .catch(next) // stretch - read https://expressjs.com/en/guide/routing.html#route-methods
+    .catch(next) // READ - https://expressjs.com/en/guide/routing.html#route-methods
 })
 
 // fix - show route might need to go here
@@ -34,7 +22,7 @@ router.get('/new', (req, res, next) => {
 router.post("/", (req, res, next) => { // todo - verify curator
     Snippet.create(req.body)
     .then(snippet => res.json(snippet))
-    .then(console.log('^ snippet create ^'))
+    .then(console.log('^ snippet created ^'))
     .then(res.render('partials/snippets')) // todo - review redirect path
     .catch(next)
 })

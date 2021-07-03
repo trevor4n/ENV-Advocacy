@@ -1,7 +1,5 @@
-const express = require('express')
 const cors = require('cors')
 const ejs = require('ejs')
-const app = express()
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const keys = require('./backend/config/keys')
@@ -9,7 +7,9 @@ const mongoose = require('mongoose')
 const User = require('./backend/models/user')
 const Snippet = require('./backend/models/snippet')
 const session = require('express-session')
+const express = require('express')
 
+const app = express()
 const port = 4100
 let snipArray = []
 let snipOut = null
@@ -21,24 +21,11 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:'+port+'/auth/google/redirect'
 },
 (accessToken, refreshToken, profile, done) => {
-    //console.log(profile)
     // user = await User.findOneAndUpdate(
     //     { email: profile.emails[0].value },
     //     { googleId: profile.id },
     //     { upsert: true, new: true, setDefaultsOnInsert: true },
     //   )
-    // /*
-    /*
-    User.findOne({googleId: profile.id})
-    .then(currentUser => {
-        if(currentUser)
-            done(null, currentUser)
-        else{
-            new User({googleId: profile.id, curator: true, name: profile.name, email: profile.email}).save()
-            .then(newUser => {done(null, newUser)}) //callback signaling to passport that user access is complete
-        }
-    })
-    */
     User.findOne({googleId: profile.id})
     .then(currentUser => {
         if(!currentUser){
@@ -68,8 +55,6 @@ passport.use(new GoogleStrategy({
             done(null, currentUser)
         }
     })
-    // */
-    // console.log('access token: ', accessToken)
 }))
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -80,9 +65,9 @@ passport.deserializeUser((id, done) => {
     })
 })
 app.use(session({
-    //  express-session default cookie values 🖤
+    // express-session default cookie values 🖤
     resave: true,
-    //  express-session non-default values ❤️
+    // express-session non-default values ❤️
     saveUninitialized: false,
     secret: keys.session.sessionKey,
     maxAge: 1000*60*60 //expires in one hour (ms)
@@ -97,17 +82,7 @@ app.use(cors())
 app.use(passport.initialize())
 app.use(passport.session())
 
-// START - controllers (after middleware)
-const snippetController = require('./backend/controllers/snippet')
-app.use('/snippet', snippetController)
-
-const orgController = require('./backend/controllers/org')
-app.use('/org', orgController)
-
-const userController = require('./backend/controllers/user')
-app.use('/user', userController)
-// END - controllers
-
+// START - primary controllers (after middleware)
 app.get('/auth/google', passport.authenticate('google', {
     scope : ['profile', 'email'],
     prompt : "select_account" 
@@ -116,13 +91,13 @@ app.get('/auth/google', passport.authenticate('google', {
 // fix - chrome error: The page delivered both an 'X-Frame-Options' header and a 'Content-Security-Policy' header with a 'frame-ancestors' directive. Although the 'X-Frame-Options' header alone would have blocked embedding, it has been ignored.
 // app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
 app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
-    console.log('curator: ' + req.user) 
-    //res.render('index', {user: req.user}, {cache: true}) // fix - req
-    // return res.redirect('/')
+    console.log('user::', req.user)
+    // res.render('index', {user: req.user}, {cache: true}) // FIXED - res not req ... cache leads to error
     // res.redirect('/')
+    // return res.redirect('/')
 })
 
-app.get('/auth/logout', (req, res) => { // todo - verify req or res below
+app.get('/auth/logout', (req, res) => { // todo - verify req / res
     req.logout()
     // req.session.destroy()
     // res.clearCookie("connect.sid")
@@ -132,9 +107,9 @@ app.get('/auth/logout', (req, res) => { // todo - verify req or res below
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode || 500
     const message = err.message || 'Internal Server Error'
-    //res.status(statusCode).send(message)
-    //console.log(res.status(statusCode))
-    console.log('status:',statusCode)
+    // res.status(statusCode).send(message)
+    // console.log(res.status(statusCode))
+    console.log('status: ',statusCode)
 })
 
 app.set('view engine', 'ejs')
@@ -163,10 +138,21 @@ app.get('/', (req, res, next) => {
                 })
                 // console.log('snip array[0]::', snipArray[0].data)
                 snipOut = snipArray[0]
-                res.render('index', {user: req.user, snipsnip: snipOut}) // fix - req & removed {cache: true}
+
+                res.render('index', {user: req.user, snipsnip: snipOut})
         })
     }
 })
+// END - primary controllers (after middleware)
+
+// START - secondary controllers (attach routers)
+const snippetController = require('./backend/controllers/snippet')
+app.use('/snippet', snippetController)
+const orgController = require('./backend/controllers/org')
+app.use('/org', orgController)
+const userController = require('./backend/controllers/user')
+app.use('/user', userController)
+// END - secondary controllers (attach routers)
 
 // START - HELPER CALLBACK FXs
 // function getSnip(s){
@@ -244,8 +230,8 @@ app.locals.getSnippetsHelper = function(usr){
             })
         })
         */
-    } else { // logged in with snippets seen
-        console.log('zzzz')
+    } else {
+        console.log('logged in with snippets seen')
         // Snippet.find({_id: {$nin: usr.reRolled}, }) //find all exclusive of previously seen
         Snippet.find({id: {$nin: usr.reRolled}})
         .then( snippets => {
