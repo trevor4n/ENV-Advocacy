@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => { // todo - verify curator
     // .then(snippets => res.json(snippets))
     // .then(console.log("Gonna render snippets now..."))
     // .then((snippets, tagSet) => res.render('snippets', {user: req.user, snips: snippets, tags: tagSet})) // ejs detects dir and extension
-    .then((snippets) => res.render('snippets', {user: req.user, snips: snippets})) // ejs detects dir and extension
+    .then(snippets => res.render('partials/snippets', {user: req.user, snips: snippets})) // ejs detects dir and extension
     .catch(next) // stretch - read https://expressjs.com/en/guide/routing.html#route-methods
 })
 

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
-:root{
+:root {
     --grid-cols: 1;
     --grid-rows: 1;
     background: rgb(253,187,45);
@@ -21,23 +21,22 @@ body {
 }
 
 /* Fixed HTML Structure */
-/* header, main, footer {
+header, main, footer {
     padding-left: 300px;
-  }
-
-  @media only screen and (max-width : 992px) {
+}
+@media only screen and (max-width : 992px) {
     header, main, footer {
       padding-left: 0;
     }
-  } */
-
-main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-    flex: 1 0 auto;
 }
 
 nav {
     background-color: #718b9f !important;
+}
+
+main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    flex: 1 0 auto;
 }
 
 footer {
@@ -47,12 +46,10 @@ footer {
 }
 
 .subheader {
-    /* color: #d3b99e !important; */
     color: #e6b17f !important;
-    /* color: #ff9891 !important; */
-
 }
-.wrap{
+
+/* .wrap{
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -63,7 +60,8 @@ footer {
     text-align: center;
     padding: 2vh;
     height: 20vh;
-}
+} */
+
 .sidenav {
     height: 100%;
     width: 200px;
@@ -74,25 +72,35 @@ footer {
     /* background-color: #ee6e73; */
     background-color: #718b9f !important;
     overflow-x: hidden;
-    padding-top: 20px;
+    /* padding-top: 0px;1 */
     color: black;
   }
+
 .background {
     /* background: url("/public/images/200902_Lightroom_IMGP9088.jpg") no-repeat center center; */
     /* background-size: 100% 55vh; */
-    margin-bottom: 0px;
-    padding: 15px 0 0 15px;
+    /* margin-bottom: 0px; */
+    /* padding: 15px 0 0 15px; */
     color: white;
 }
+
 .sidenav-header .row {
     margin-bottom: 0;
 }
+
 .sidenav-overlay{
     display: none !important;
 }
+
+.user-view {
+    /* margin-bottom: 0 !important; */
+    padding: 32px !important;
+}
+
 .material-icons {
     vertical-align: middle;
 }
+
 .noselect { /* https://stackoverflow.com/a/9314458/3911210 */
     -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */

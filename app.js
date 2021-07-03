@@ -81,6 +81,9 @@ passport.deserializeUser((id, done) => {
 })
 app.use(session({
     //  express-session default cookie values 🖤
+    resave: true,
+    //  express-session non-default values ❤️
+    saveUninitialized: false,
     secret: keys.session.sessionKey,
     maxAge: 1000*60*60 //expires in one hour (ms)
 }))
@@ -131,7 +134,7 @@ app.use((err, req, res, next) => {
     const message = err.message || 'Internal Server Error'
     //res.status(statusCode).send(message)
     //console.log(res.status(statusCode))
-    console.log(statusCode)
+    console.log('status:',statusCode)
 })
 
 app.set('view engine', 'ejs')
@@ -158,7 +161,7 @@ app.get('/', (req, res, next) => {
                     // console.log('doc::',doc)
                     snipArray.push(doc)
                 })
-                console.log('snip array[0]::', snipArray[0].data)
+                // console.log('snip array[0]::', snipArray[0].data)
                 snipOut = snipArray[0]
                 res.render('index', {user: req.user, snipsnip: snipOut}) // fix - req & removed {cache: true}
         })
