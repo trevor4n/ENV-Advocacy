@@ -231,7 +231,7 @@ app.locals.getSnippetsHelper = function(usr){
         })
         */
     } else {
-        console.log('logged in with snippets seen')
+        console.log('🚧 logged in with snippets seen 🚧')
         // Snippet.find({_id: {$nin: usr.reRolled}, }) //find all exclusive of previously seen
         Snippet.find({id: {$nin: usr.reRolled}})
         .then( snippets => {

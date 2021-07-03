@@ -31,7 +31,8 @@ router.post("/", (req, res, next) => { // todo - verify curator
 router.get("/:id", (req, res, next) => { // todo - verify curator
     Snippet.findById(req.params.id)
     .populate('curator')
-    .then(snippet => res.render('partials/showSnippet', {data: snippet.data, src: snippet.src, curator: snippet.curator, tags: snippet.tags}))  
+    // .then(snippet => res.render('partials/showSnippet', {data: snippet.data, src: snippet.src, curator: snippet.curator, tags: snippet.tags}))  
+    .then(snippet => res.render('partials/showSnippet', {snip: snippet}))  
     // .then(snippet => res.json(snippet))
     // todo - review redirect path
     .catch(next)

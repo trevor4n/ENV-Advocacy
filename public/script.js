@@ -22,7 +22,6 @@
             console.log('isOpen', inst.isOpen)
             if(!inst.isOpen()){
                 inst.open()
-                console.log('really?')
             }
             else{
                 inst.close()

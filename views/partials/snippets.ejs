@@ -6,27 +6,31 @@
       <ul class="collection with-header">
         <!-- stretch - use a collapsible instead of a collection -->
         <li class="collection-header">
-          <h4>Snippets</h4>
-          <a href="/snippet/newSnippet" class="secondary-content"><i class="material-icons">fiber_new</i></a>
+          <h4>Snippets</h4> 
+          <!-- <a href="/snippet/newSnippet" class="btn"><i class="material-icons">fiber_new</i></a> -->
         </li>
         <% snips.forEach(snip => { %> 
           <li class="collection-item">
             <span class="snip"> Snippet: <%= snip.data %> </span>
-            <span class="tags"> Tags: <%= tagSet %> </span>
+            <br><br>
+            <span class="tags"> Tags: <%= snip.tags %> </span>
+            <br><br>
             <span class="src"> Source: <%= snip.src %> </span>
-            <a href="/snippet/<% this.id %>" class="secondary-content"><i class="material-icons">pageview</i></a>
-            <a href="/snippet/<% this.id %>/edit" class="secondary-content"><i class="material-icons">edit</i></a>
-            <form action="/snippet/<% this.id %>?_method=DELETE" method="POST" class="d-inline">
+            <!-- <a href="#!" class="secondary-content btn"><i class="material-icons">delete</i></a> -->
+            <form action="/snippet/<% snip.id %>?_method=DELETE" method="POST" class="secondary-content">
               <!-- ^ method overriding -->
               <!-- <button class="btn waves-effect waves-light red" type="submit" name="action">Delete -->
-              <button class="btn waves-effect waves-light red" type="submit" name="action">
-                <i class="material-icons right">delete</i>
+              <button class="btn waves-effect waves-light red" type="submit" name="action">delete
+                <i class="material-icons left">delete</i>
               </button>
             </form>
-            <a href="#!" class="secondary-content"><i class="material-icons">delete</i></a>
+            <a href="/snippet/<%= snip.id %>/edit" class="secondary-content btn"><i class="material-icons">edit</i></a>
+            <a href="/snippet/<%= snip.id %>" class="secondary-content btn"><i class="material-icons">pageview</i></a>
+            <br><br>
           </li>
         <% }) %> 
       </ul>
+      <div class="fixed-action-btn"><a class="btn-floating btn-large blue pulse" href="/#!" target="_self"><i class="large material-icons">library_add</i></a></div>
     </main>
     <%- include('footer') %> 
     <!-- Compiled and minified JavaScript -->

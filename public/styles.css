@@ -22,7 +22,7 @@ body {
 
 /* Fixed HTML Structure */
 header, main, footer {
-    padding-left: 300px;
+    padding-left: 200px;
 }
 @media only screen and (max-width : 992px) {
     header, main, footer {
@@ -35,7 +35,8 @@ nav {
 }
 
 main {
-    margin-left: 200px; /* Same as the width of the sidenav */
+    /* Same as the width of the sidenav */
+    /* margin-left: 200px;  */
     flex: 1 0 auto;
 }
 
@@ -47,6 +48,10 @@ footer {
 
 .subheader {
     color: #e6b17f !important;
+}
+
+.almostManhattan {
+    color: #E6B17F !important;
 }
 
 /* .wrap{
