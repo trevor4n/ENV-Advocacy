@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Snippet = require('../models/snippet')
 
-//Index
+// Index
 router.get('/', (req, res, next) => { // todo - verify curator
     Snippet.find({})
     .populate('curator')
@@ -11,69 +11,64 @@ router.get('/', (req, res, next) => { // todo - verify curator
     .catch(next) // READ - https://expressjs.com/en/guide/routing.html#route-methods
 })
 
-// fix - show route might need to go here
-
-// fix - express-mvc ref
-router.get('/new', (req, res, next) => {
+// Create
+router.get('/new', (req, res, next) => { // todo - verify curator
     res.render('partials/newSnippet')
 })
-
-//Create
 router.post("/", (req, res, next) => { // todo - verify curator
-    Snippet.create(req.body)
-    .then(snippet => res.json(snippet))
-    .then(console.log('^ snippet created ^'))
-    .then(res.render('partials/snippets')) // todo - review redirect path
+    Snippet.create({
+        data: req.body.data,
+        tags: req.body.tags,
+        src: req.body.src,
+        // hidden: req.body.hidden === 'on', // stretch - hidden/archived/recycle-bin for snippets
+        curator: req.user._id // stretch - curator: session user / editor
+    })
+    .then( snippet => { // fixed - ValidatorError, req.body { action: ''}, form inputs require schema
+        res.redirect('/snippet')
+    })
+    // .catch(console.error)
     .catch(next)
 })
 
-//Show / Detail
+// Show / Detail
 router.get("/:id", (req, res, next) => { // todo - verify curator
     Snippet.findById(req.params.id)
     .populate('curator')
-    // .then(snippet => res.render('partials/showSnippet', {data: snippet.data, src: snippet.src, curator: snippet.curator, tags: snippet.tags}))  
-    .then(snippet => res.render('partials/showSnippet', {snip: snippet}))  
-    // .then(snippet => res.json(snippet))
-    // todo - review redirect path
+    .then(snippet => {
+        // console.log(`Snippet::${snippet}`)
+        res.render('partials/showSnippet', {snip: snippet})
+    })  
     .catch(next)
 })
 
-// fix - express-mvc ref
+// Update
 router.get("/:id/edit", (req, res, next) => { // todo - verify curator
     Snippet.findById(req.params.id)
     .populate('curator')
-    .then(snippet => res.render('partials/editSnippet', {data: snippet.data, src: snippet.src, curator: snippet.curator, tags: snippet.tags}))  
-    // .then(snippet => res.json(snippet))
-    // todo - review redirect path
+    .then(snippet => res.render('partials/editSnippet', {snip: snippet}))
     .catch(next)
 })
-
-//Update - put
 router.put('/:id', (req, res, next) => { // todo - verify curator
-    const id = req.params.id
+    console.log('cur::',req.user)
     Snippet.findOneAndUpdate(
-        {_id: id}, // todo - review underscore
+        {_id: req.params.id},
         {
             data: req.body.data,
             tags: req.body.tags,
             src: req.body.src,
-            curator: req.body.curator // todo - session user (curator)
+            // hidden: req.body.hidden === 'on', // stretch - hidden/archived/recycle-bin for snippets
+            curator: req.user._id // stretch - curator: session user / editor
         },
         {new: true}
     )
-    .then(snippet => res.json(snippet))
-    .then(console.log('^ snippet updated ^'))
-    .then(res.redirect('partials/showSnippet'))
-    // todo - review redirect path
+    .then(res.redirect('/snippet'))
     .catch(next)
 })
 
-//Destroy
+// Destroy
 router.delete("/:id", (req, res, next) => { // todo - verify curator
     Snippet.findByIdAndRemove(req.params.id)
-    //.then(snippet => res.json(snippet))
-    .then(console.log('^ snippet destroyed ^'))
-    .then(res.redirect('partials/snippets')) // todo - review redirect path
+    .then(res.redirect('/snippet'))
     .catch(next)
 })
 

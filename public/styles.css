@@ -81,6 +81,10 @@ footer {
     color: black;
   }
 
+.newSnip {
+    background-color: white;
+}
+
 .background {
     /* background: url("/public/images/200902_Lightroom_IMGP9088.jpg") no-repeat center center; */
     /* background-size: 100% 55vh; */

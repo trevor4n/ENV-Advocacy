@@ -40,7 +40,7 @@ router.post("/", (req, res, next) => { // todo - verify curator
 router.put('/:id', (req, res, next) => { // todo - verify curator
     const id = req.params.id
     Org.findByIdAndUpdate(
-        {_id: id}, // todo - review underscore
+        {_id: id},
         {
             name: req.body.name,
             logo: req.body.logo,

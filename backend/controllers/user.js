@@ -40,7 +40,7 @@ router.put('/:id', (req, res, next) => { // todo - verify curator/admin??
     const id = req.params.id
     User.findByIdAndUpdate(
     // User.findOneAndUpdate(
-        {_id: id}, // todo - review underscore
+        {_id: id},
         {
             name: req.body.name,
             tags: req.body.tags,

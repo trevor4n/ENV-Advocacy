@@ -1,7 +1,7 @@
 const mongoose = require('../db/connections')
 
 const SnippetSchema = new mongoose.Schema({
-    data: String,
+    data: {type: String, required: true},
     tags: [String],
     src: {type: String, required: 'Please document your {PATH}'}, //todo - verify that path prints as src
     // ref: {
@@ -13,7 +13,7 @@ const SnippetSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     } 
-})
+}, {timestamps: true})
 
 const Snippet = mongoose.model('Snippet', SnippetSchema)
 

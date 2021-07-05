@@ -14,3 +14,7 @@ mongoose.connect(mongoURI, { //connect method is asynchronous
 .catch((error) => console.log('Connection failed!', error))
 
 module.exports = mongoose
+
+// STRETCH - using ES6 Promises instead of callbacks for monngoose queries 
+// https://stackoverflow.com/a/54995263/3911210
+// https://rossbulat.medium.com/using-promises-async-await-with-mongodb-613ed8243900

@@ -17,7 +17,7 @@
             <br><br>
             <span class="src"> Source: <%= snip.src %> </span>
             <!-- <a href="#!" class="secondary-content btn"><i class="material-icons">delete</i></a> -->
-            <form action="/snippet/<% snip.id %>?_method=DELETE" method="POST" class="secondary-content">
+            <form action="/snippet/<%= snip.id %>?_method=DELETE" method="POST" class="secondary-content">
               <!-- ^ method overriding -->
               <!-- <button class="btn waves-effect waves-light red" type="submit" name="action">Delete -->
               <button class="btn waves-effect waves-light red" type="submit" name="action">delete
@@ -30,7 +30,7 @@
           </li>
         <% }) %> 
       </ul>
-      <div class="fixed-action-btn"><a class="btn-floating btn-large blue pulse" href="/#!" target="_self"><i class="large material-icons">library_add</i></a></div>
+      <div class="fixed-action-btn"><a class="btn-floating btn-large blue pulse" href="/snippet/new" target="_self"><i class="large material-icons">library_add</i></a></div>
     </main>
     <%- include('footer') %> 
     <!-- Compiled and minified JavaScript -->

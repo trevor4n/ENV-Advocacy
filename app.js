@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const User = require('./backend/models/user')
 const Snippet = require('./backend/models/snippet')
 const session = require('express-session')
+const methodOverride = require('method-override')
 const express = require('express')
 
 const app = express()
@@ -75,8 +76,9 @@ app.use(session({
 // END - PassportJS
 
 // Use middleware to parse the data in the HTTP request body and add a property of body to the request object containing a POJO (Plain Old Java Object) with with data.
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json()) //parses application/json request data and adds it to the request object as request.body
+app.use(express.urlencoded({ extended: true })) //parses x-ww-form-urlencoded request data and adds it to the request object as request.body
+app.use(methodOverride('_method'))
 app.use('/public',express.static('public')) // static server
 app.use(cors())
 app.use(passport.initialize())
