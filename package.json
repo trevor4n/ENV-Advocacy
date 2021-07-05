@@ -10,5 +10,24 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0"
-  }
+  },
+  "name": "env-advocacy",
+  "description": "",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevor4n/ENV-Advocacy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trevor4n/ENV-Advocacy/issues"
+  },
+  "homepage": "https://github.com/trevor4n/ENV-Advocacy#readme"
 }
