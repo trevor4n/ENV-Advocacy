@@ -10,11 +10,11 @@ let seedCurator = null
 
 // stretch - use conditionals instead of comments
 // Start - section to comment out during all subsequent seeds
-seedCurator = User.create({name: 'Curator', curator: true})
+// seedCurator = User.create({name: 'Curator', curator: true})
 // End - section to comment out during all subsequent seeds
 
 // Start - section to comment out during first seed ever
-/*
+// /*
 Snippet.deleteMany({})
 .then(() => {
     Org.deleteMany({})
@@ -32,7 +32,7 @@ Snippet.deleteMany({})
     seedCurator = User.create({name: 'Curator', curator: true})
     return seedCurator
 })
-*/
+// */
 // End - section to comment out during first seed ever
 .then((user) => {
     return snippetSeeds.map( (snippet) => {
