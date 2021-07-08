@@ -17,8 +17,8 @@ let snipOut = null
 
 // START - PassportJS Google OAuth 2.0
 passport.use(new GoogleStrategy({
-    clientID: keys.google.clientID,
-    clientSecret: keys.google.clientSecret,
+    clientID: process.env.NODE_ENV === 'production' ? process.env.client_id : keys.google.clientID,
+    clientSecret: process.env.NODE_ENV === 'production' ? process.env.client_secret : keys.google.clientSecret,
     callbackURL: 'http://localhost:'+port+'/auth/google/redirect'
 },
 (accessToken, refreshToken, profile, done) => {
@@ -70,7 +70,7 @@ app.use(session({
     resave: true,
     // express-session non-default values ❤️
     saveUninitialized: false,
-    secret: keys.session.sessionKey,
+    secret: process.env.NODE_ENV === 'production' ? process.env.session_key : keys.session.sessionKey,
     maxAge: 1000*60*60 //expires in one hour (ms)
 }))
 // END - PassportJS
