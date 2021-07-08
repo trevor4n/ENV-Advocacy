@@ -2,7 +2,8 @@ const cors = require('cors')
 const ejs = require('ejs')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const keys = require('./backend/config/keys')
+// const keys = require('./backend/config/keys')
+// ^ useful for local testing & non-operable w/ heroku
 const mongoose = require('mongoose')
 const User = require('./backend/models/user')
 const Snippet = require('./backend/models/snippet')
@@ -17,8 +18,12 @@ let snipOut = null
 
 // START - PassportJS Google OAuth 2.0
 passport.use(new GoogleStrategy({
-    clientID: process.env.NODE_ENV === 'production' ? process.env.client_id : keys.google.clientID,
-    clientSecret: process.env.NODE_ENV === 'production' ? process.env.client_secret : keys.google.clientSecret,
+    // clientID: process.env.NODE_ENV === 'production' ? process.env.client_id : keys.google.clientID,
+    // ^ useful for local testing & non-operable w/ heroku
+    clientID: process.env.client_id,
+    // clientSecret: process.env.NODE_ENV === 'production' ? process.env.client_secret : keys.google.clientSecret,
+    // ^ useful for local testing & non-operable w/ heroku
+    clientSecret: process.env.client_secret,
     callbackURL: 'http://localhost:'+port+'/auth/google/redirect'
 },
 (accessToken, refreshToken, profile, done) => {
@@ -50,7 +55,7 @@ passport.use(new GoogleStrategy({
                 // }
             )
             // .then((error, updatedUser) => {
-            //     console.log(updatedUser)
+             //     console.log(updatedUser)
             //    return done(null, updatedUser)
             // })
             done(null, currentUser)
@@ -70,7 +75,9 @@ app.use(session({
     resave: true,
     // express-session non-default values ❤️
     saveUninitialized: false,
-    secret: process.env.NODE_ENV === 'production' ? process.env.session_key : keys.session.sessionKey,
+    // secret: process.env.NODE_ENV === 'production' ? process.env.session_key : keys.session.sessionKey,
+    // ^ useful for local testing & non-operable w/ heroku
+    secret: process.env.session_key,
     maxAge: 1000*60*60 //expires in one hour (ms)
 }))
 // END - PassportJS
