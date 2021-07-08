@@ -24,7 +24,7 @@ passport.use(new GoogleStrategy({
     // clientSecret: process.env.NODE_ENV === 'production' ? process.env.client_secret : keys.google.clientSecret,
     // ^ useful for local testing & non-operable w/ heroku
     clientSecret: process.env.client_secret,
-    callbackURL: 'http://localhost:'+port+'/auth/google/redirect'
+    callbackURL: '/auth/google/redirect'
 },
 (accessToken, refreshToken, profile, done) => {
     // user = await User.findOneAndUpdate(
@@ -99,7 +99,7 @@ app.get('/auth/google', passport.authenticate('google', {
 
 // fix - chrome error: The page delivered both an 'X-Frame-Options' header and a 'Content-Security-Policy' header with a 'frame-ancestors' directive. Although the 'X-Frame-Options' header alone would have blocked embedding, it has been ignored.
 // app.get('/auth/google/redirect', passport.authenticate('google', { failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
-app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: 'http://localhost:' + port + '/', failureRedirect: 'http://localhost:' + port + '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
+app.get('/auth/google/redirect', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/'}), (req, res, next) => { // stretch - add a back button to the login page (so that failures can redirect to /auth/login instead of /)
     console.log('user::', req.user)
     // res.render('index', {user: req.user}, {cache: true}) // FIXED - res not req ... cache leads to error
     // res.redirect('/')
