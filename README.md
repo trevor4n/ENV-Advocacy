@@ -7,7 +7,7 @@
 
 
 ### &#x1F534; Introduction
-Environmental engagement ebbs and flows in our culture just like our personal lives. Despite our best efforts and intentions, we simply don't have enough time to deep dive into everything. EAH was built to make environmental education efficient and approachable. Unlike local weather patterns, which we casually notice, the climate of our planet carries momentum. That's exactly why our choices today can have such a powerful impact down the road. Information can empower us to make intelligent decisions beneficial in the long-term. Whether you're pursuing the journey of a visitor or curator... *Environmental Advocacy Hub is going places -* [watch it run!](https://trevor4n.github.io/Sutton/)
+Environmental engagement ebbs and flows in our culture just like our personal lives. Despite our best efforts and intentions, we simply don't have enough time to deep dive into everything. EAH was built to make environmental education efficient and approachable. Unlike local weather patterns, which we casually notice, the climate of our planet carries momentum. That's exactly why our choices today can have such a powerful impact down the road. Information can empower us to make intelligent decisions beneficial in the long-term. Whether you're pursuing the journey of a visitor or curator... *Environmental Advocacy Hub is going places -* [watch it run!](https://infinite-savannah-66084.herokuapp.com/)
 ### &#x1F534; Description
 **Users:** Anyone who has been overwhelmed by social media competition for attention - anyone fed up with promotion - anyone ready to pledge themselves to a worthy cause.
 
@@ -23,17 +23,17 @@ Environmental engagement ebbs and flows in our culture just like our personal li
  - EJS templates for server-side rendering
  - MaterializeCSS design framework
  - PassportJS authentication
- - **[Heroku (Hosted)](https://trevor4n.github.io/Sutton/)**
+ - **[Heroku (Hosted)](https://infinite-savannah-66084.herokuapp.com/)**
 
 
 ### &#x1F534; User Stories
 ### MVP
  - [x] As a visitor, I want to find motivation, so that I can do something different today
  - [x] As a visitor, I want to read a curated snippet of verified environmental data, so that I can understand the urgency behind organizations of change
- - [ ] As a visitor, I want to be able to re-roll snippets, so that I can read topical info that speaks to me
  - [x] As a curator, I want to add snippets via CRUD, to diversify the user's experience
 
 > ### 🚧 Icebox Goals - features under construction (check back in!)
+> - [ ] As a visitor, I want to be able to re-roll snippets, so that I can read topical info that speaks to me
 > - [ ] As a visitor, I want to be able to filter topics, so that I can receive suggestions I'm interested in learning more about
 > - [ ] As a visitor, I want to choose between orgs relating to the current snippet, so that I can focus my attention
 > - [ ] As a visitor, I want to read a brief summary for each org, so that I can begin to understand the relationship between advocacy orgs, data, and the environment
