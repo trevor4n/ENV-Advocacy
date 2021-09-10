@@ -1,0 +1,32 @@
+[
+    {
+        "data": "At lower elevations where temperatures are near the freezing point, global warming is causing a significant shift from snowfall events to rainfall events",
+        "tags": ["climate", "winter", "global"],
+        "src": "https://protectourwinters.org/wp-content/uploads/2019/12/POW-2018-economic-report.pdf"
+    },
+    {
+        "data": "On land, impacts on biodiversity and ecosystems, including species loss and extinction, are projected to be lower at 1.5°C of global warming compared to 2°C. Limiting global warming to 1.5°C compared to 2°C is projected to lower the impacts on terrestrial, freshwater and coastal ecosystems",
+        "tags": ["climate", "scientific", "global"],
+        "src": "https://www.ipcc.ch/sr15/chapter/spm/"
+    },
+    {
+        "data": "The planet's average surface temperature has risen about 2.12 degrees Fahrenheit since the late 19th century, a change driven largely by increased carbon dioxide emissions into the atmosphere and other human activities. Most of the warming occurred in the past 40 years, with the seven most recent years being the warmest. The years 2016 and 2020 are tied for the warmest year on record.",
+        "tags": ["climate", "scientific", "global"],
+        "src": "https://climate.nasa.gov/evidence/"
+    },
+        {
+        "data": "Electricity consumption reached new highs in the residential and agricultural sectors in 2017. Electricity consumption in the residential sector grew by 4.3 percent—driven in part by an increase in plug-in electronic devices and EVs—and by 2.9 percent in the agricultural sector from 2016 to 2017. [California]",
+        "tags": ["climate", "energy"],
+        "src": "https://www.next10.org/sites/default/files/2019-10/2019-california-green-innovation-index-press-release_2.pdf"
+    },
+        {
+        "data": "Some e-waste from industrialized countries is being shipped to the developing world, “where crude and inefficient techniques are often used to extract materials and components”, a trend which is posing challenges to global sustainability governance", 
+        "tags": ["climate", "governance", "global"],
+        "src": "https://unfccc.int/news/un-ecological-damage-putting-millions-of-lives-at-risk"
+    },
+    {   
+        "data": "From 2008 to 2017, the fraction of precipitation falling as snow declined at a rate of 3.5 percent per year (Sierra Nevada Mountain Range)",
+        "tags": ["climate", "winter", "sports"],
+        "src": "https://www.climate.gov/news-features/climate-and/climate-skiing"
+    }
+]

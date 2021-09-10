@@ -1,0 +1,32 @@
+<%- include('header') %> 
+  <body>
+    <%- include('nav') %> 
+    <%- include('sidenav') %> 
+    <main>
+
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title almostManhattan"> Snippet ID: <%= snip.id %> </span>
+              <p> <%= snip.data %> </p>
+              <br>
+              <span class="tagsSpan"> Tags: <%= snip.tags %> </span> <!-- FIX - ejsout ? -->
+              <br>
+              <span class="snippetSrc"> Source: <%= snip.src %> </span> <!-- FIX - ejsout ? -->
+              <!-- stretch - consider showing curator creator/editor -->
+            </div>
+            <div class="card-action">
+              <a href="/snippet/"><i class="material-icons left">arrow_back</i> Go Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <%- include('footer') %> 
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/public/script.js"></script>
+  </body>
+</html> 

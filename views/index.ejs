@@ -1,0 +1,47 @@
+<% 
+let dat = null
+let src = null 
+let snap = null
+if(locals.user){
+  dat = snipsnip.data
+  src = snipsnip.src
+} else {
+  snap = snippets[Math.floor(Math.random()*snippets.length)]
+  dat = snap.data
+  src = snap.src
+}
+%> 
+<%- include('partials/header') %> 
+  <body>
+    <%- include('partials/nav') %> 
+    <%- include('partials/sidenav') %> 
+    <main>
+      <div id="d3">
+        <div id="snippet"> 
+          <div class="row ">
+            <div class="col s12 m6">
+              <div class="card">
+                <div class="card-image">
+                  <img src="/public/images/200905_Lightroom_IMG_20200605_205647.jpg">
+                  <!-- todo - materialize chips section -->
+                  <span class="card-title">  <p>Let's find something to peak your interest. <br> E.A.H. will keep track of what visitors like, <br> and keep improving it's curating abilities. <br> Refresh until you find a topic you care about!</p> </span>
+                  <a class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">autorenew</i></a>                </div>
+                <div class="card-content">
+                  <%= dat %>
+                </div>
+                <div class="card-action">
+                  <a href="#!"><i class="small material-icons">search</i> What can I do?</a>
+                  <a href="<%= src %>" target="_blank"><i class="small material-icons">book</i> Learn more - direct from the source</a> <!-- icebox - waterfall icon -->
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </main>
+    <%- include('partials/footer') %> 
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/public/script.js"></script>
+  </body>
+</html> 

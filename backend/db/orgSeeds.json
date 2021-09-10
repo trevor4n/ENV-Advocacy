@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Protect Our Winters",
+        "abrev": "POW",
+        "logo": "https://protectourwinters.org/wp-content/uploads/pow-main-logo.svg",
+        "tags": ["winter", "sports", "climate"],
+        "url": "https://protectourwinters.org/"
+    },
+    {
+        "name": "The Intergovernmental Panel on Climate Change",
+        "abrev": "ipcc",
+        "logo": "https://www.ipcc.ch/site/assets/uploads/sites/2/2018/08/ipcc-logo.png",
+        "tags": ["policy", "scientific", "United Nations", "climate"],
+        "url": "https://www.ipcc.ch/"
+    },
+    {
+        "name": "Global Climate Change",
+        "abrev": "NASA",
+        "logo": "https://climate.nasa.gov/assets/logo_nasa_trio_black@2x.png",
+        "tags": ["scientific", "global", "climate"],
+        "url": "https://climate.nasa.gov/"
+    },
+    {
+        "name": "Next 10",
+        "logo": "https://www.next10.org/themes/custom/nexttheme/logo.svg",
+        "tags": ["economy", "energy", "governance", "climate"],
+        "url": "https://www.next10.org/"
+    },
+    {
+        "name": "United Nations",
+        "abrev": "UN",
+        "logo": "https://unfccc.int/themes/custom/unfccc/images/logo.png",
+        "tags": ["economy", "governance", "United Nations", "climate"],
+        "url": "https://unfccc.int/"
+    }
+]
